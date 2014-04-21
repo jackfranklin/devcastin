@@ -4,5 +4,6 @@ module Devcasts
     autoload :User, 'models/user'
     autoload :Video, 'models/video'
     autoload :Purchase, 'models/purchase'
+    autoload :GuestUser, 'models/guest_user'
   end
 end
