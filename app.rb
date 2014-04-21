@@ -10,6 +10,8 @@ Dotenv.load
 require 'models'
 require 'routes'
 
+require 'mongoid'
+
 module Devcasts
   class App < Sinatra::Application
     configure do
@@ -22,6 +24,8 @@ module Devcasts
           :expire_after => 31557600, # 1 year
           :secret       => ENV['SESSION_SECRET']
     end
+
+    Mongoid.load!("mongoid.yml", ENV['RACK_ENV'])
 
     use OmniAuth::Builder do
       provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']

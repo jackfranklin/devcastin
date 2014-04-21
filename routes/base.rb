@@ -4,6 +4,9 @@ module Devcasts
       # error Models::NotFound do
       #   error 404
       # end
+
+      include Devcasts::Models
+
       set :views, 'views'
       set :root, File.expand_path('../../', __FILE__)
     end
