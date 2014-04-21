@@ -1,0 +1,12 @@
+development:
+  sessions:
+    default:
+      database: devcastin
+      hosts:
+        - localhost:27017
+test:
+  sessions:
+    default:
+      database: devcastin_tests
+      hosts:
+        - localhost:27017
