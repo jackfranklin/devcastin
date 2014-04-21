@@ -44,4 +44,21 @@ describe User do
       expect(user_videos[1]).to eq(videos[1])
     end
   end
+
+  describe "#has_video" do
+    it "is true if the user has purchased the video" do
+      user = build(:user)
+      purchase = build(:purchase, user: user)
+      video = build(:video, purchase: purchase)
+      expect(user.has_video(video)).to be_true
+    end
+
+    it "is false if the user has not purchased the video" do
+      user = build(:user)
+      user2 = build(:user)
+      purchase = build(:purchase, user: user2)
+      video = build(:video, purchase: purchase)
+      expect(user.has_video(video)).to be_false
+    end
+  end
 end
