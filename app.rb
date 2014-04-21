@@ -33,8 +33,15 @@ module Devcasts
 
     use Rack::Deflater
 
+    helpers do
+      def signed_in?
+        !session[:user_id].nil?
+      end
+    end
+
     use Routes::Index
     use Routes::Auth
+
 
   end
 
