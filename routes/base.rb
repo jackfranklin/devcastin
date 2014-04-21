@@ -6,6 +6,7 @@ module Devcasts
       # end
 
       include Devcasts::Models
+      include Devcasts::Presenters
 
       helpers do
         def signed_in?
