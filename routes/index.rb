@@ -5,7 +5,7 @@ module Devcasts
       #   error 404
       # end
       get '/' do
-        @latest_video = Video.last || Struct.new(:title).new('Fake')
+        @latest_videos = Video.all.desc('_id').limit(5)
         erb :index
       end
     end

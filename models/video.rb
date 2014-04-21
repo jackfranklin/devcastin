@@ -5,6 +5,8 @@ module Devcasts
 
       belongs_to :purchase
 
+      validates :title, uniqueness: true
+
       field :title, type: String
       field :description, type: String
       field :s3_url, type: String

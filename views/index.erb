@@ -1,7 +1,19 @@
-<%= current_user.name %>
 <div class="row">
   <div class="large-12 columns">
-    <h3><%= @latest_video.title %></h3>
-
+    <h3>Latest Video</h3>
+    <h2><%= @latest_videos[0].title %></h2>
+    <p><%= @latest_videos[0].description %></p>
   </div>
 </div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h4>More recent videos</h4>
+    <ul class="small-block-grid-2">
+      <% @latest_videos.to_a.last(4).each do |video| %>
+        <li><%= video.title %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

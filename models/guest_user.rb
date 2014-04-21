@@ -5,6 +5,10 @@ module Devcasts
         "Guest User"
       end
 
+      def id
+        0
+      end
+
       def has_video(video)
         video.free?
       end

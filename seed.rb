@@ -23,6 +23,12 @@ Video.new(
   s3_url: 'http://s3.com/123'
 ).save
 
+Video.new(
+  title: 'Mocking in Ruby with Mocha',
+  description: 'lorem ipsum',
+  s3_url: 'http://s3.com/123'
+).save
+
 video3 = Video.new(
   title: 'Syntastic and Vim',
   description: 'lorem ipsum',
