@@ -14,4 +14,5 @@ gem 'shotgun'
 group :test do
   gem 'rspec'
   gem 'database_cleaner', :github => 'bmabey/database_cleaner'
+  gem 'factory_girl'
 end

@@ -10,10 +10,6 @@ module Devcasts
 
       embeds_many :purchases
 
-      def id
-        self["_id"]
-      end
-
       def self.create_or_get_from_omniauth(opts)
         user = self.where(email: opts[:email]).first
         unless user
@@ -21,6 +17,15 @@ module Devcasts
         end
         user
       end
+
+      def id
+        self["_id"]
+      end
+
+      def videos
+        self.purchases.map(&:video)
+      end
+
     end
   end
 end

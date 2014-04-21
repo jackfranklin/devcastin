@@ -1,3 +1,4 @@
+require_relative 'purchase'
 module Devcasts
   module Models
     class Video < BaseModel
@@ -7,6 +8,7 @@ module Devcasts
       field :title, type: String
       field :description, type: String
       field :s3_url, type: String
+      field :is_free, type: Boolean, default: false
 
     end
   end
