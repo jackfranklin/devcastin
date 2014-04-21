@@ -10,7 +10,7 @@ describe "Index Page" do
   let!(:video1) { create(:video) }
   let!(:video2) { create(:video) }
   let!(:video3) { create(:video) }
-  let!(:video4) { create(:video) }
+  let!(:video4) { create(:video, :is_free, title: 'Free Video') }
   let!(:video5) { create(:video, title: 'Test Video') }
 
   include Rack::Test::Methods
@@ -33,6 +33,10 @@ describe "Index Page" do
 
     it "shows the latest video" do
       expect(last_response.body).to include('Test Video')
+    end
+
+    it "marks videos as free" do
+      expect(last_response.body).to include('Free Video (FREE)')
     end
   end
 end
