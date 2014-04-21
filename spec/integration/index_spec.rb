@@ -31,12 +31,15 @@ describe "Index Page" do
       expect(last_response.body).to include('JF')
     end
 
-    it "shows the latest video" do
-      expect(last_response.body).to include('Test Video')
-    end
+  end
 
-    it "marks videos as free" do
-      expect(last_response.body).to include('Free Video (FREE)')
-    end
+  it "shows the latest video" do
+    get '/'
+    expect(last_response.body).to include('Test Video')
+  end
+
+  it "marks videos as free" do
+    get '/'
+    expect(last_response.body).to include('Free Video (FREE)')
   end
 end

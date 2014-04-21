@@ -12,6 +12,10 @@ module Devcasts
       field :s3_url, type: String
       field :is_free, type: Boolean, default: false
 
+      def id
+        self["_id"]
+      end
+
       def free?
         self.is_free
       end

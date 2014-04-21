@@ -1,3 +1,5 @@
+require 'json'
+
 module Devcasts
   module Routes
     class Base < Sinatra::Application
@@ -7,6 +9,11 @@ module Devcasts
 
       include Devcasts::Models
       include Devcasts::Presenters
+
+      error Mongoid::Errors::DocumentNotFound do
+        content_type :json
+        { error: 'mongoid no found' }.to_json
+      end
 
       helpers do
         def signed_in?

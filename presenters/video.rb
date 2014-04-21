@@ -3,7 +3,7 @@ module Devcasts
     class VideoPresenter
       extend Forwardable
 
-      def_delegators :@video, :description, :s3_url, :free?
+      def_delegators :@video, :description, :s3_url, :free?, :id
 
       def initialize(video)
         @video = video
@@ -15,6 +15,10 @@ module Devcasts
         else
           @video.title
         end
+      end
+
+      def path
+        "/videos/#{self.id}"
       end
     end
   end

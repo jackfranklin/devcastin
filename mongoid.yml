@@ -4,6 +4,13 @@ development:
       database: devcastin
       hosts:
         - localhost:27017
+production:
+  sessions:
+    default:
+      database: devcastin_prod
+      hosts:
+        - localhost:27017
+
 test:
   sessions:
     default:
