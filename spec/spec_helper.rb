@@ -8,6 +8,7 @@ end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.mock_with :mocha
   config.before(:suite) do
     Mongoid.load!("mongoid.yml", :test)
 

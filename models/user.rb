@@ -27,7 +27,7 @@ module Devcasts
       end
 
       def has_video(video)
-        self.purchases.any? do |purchase|
+        video.free? || self.purchases.any? do |purchase|
           purchase.video == video
         end
       end

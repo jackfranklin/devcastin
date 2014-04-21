@@ -9,10 +9,15 @@ gem 'dotenv'
 
 gem 'mongoid'
 
-gem 'shotgun'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
+group :development do
+  gem 'shotgun'
+end
 
 group :test do
   gem 'rspec'
   gem 'database_cleaner', :github => 'bmabey/database_cleaner'
+  gem 'mocha'
   gem 'factory_girl'
 end

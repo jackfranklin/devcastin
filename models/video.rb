@@ -10,6 +10,10 @@ module Devcasts
       field :s3_url, type: String
       field :is_free, type: Boolean, default: false
 
+      def free?
+        self.is_free
+      end
+
     end
   end
 end
