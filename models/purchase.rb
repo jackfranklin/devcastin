@@ -5,8 +5,8 @@ module Devcasts
   module Models
     class Purchase < BaseModel
 
-      embedded_in :user
-      embeds_one :video
+      belongs_to :user
+      has_one :video
 
       field :charge_id, type: String
 

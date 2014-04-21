@@ -8,7 +8,9 @@ module Devcasts
       field :name, type: String
       field :email, type: String
 
-      embeds_many :purchases
+      validates :nickname, uniqueness: true
+
+      has_many :purchases
 
       def self.create_or_get_from_omniauth(opts)
         user = self.where(email: opts[:email]).first
