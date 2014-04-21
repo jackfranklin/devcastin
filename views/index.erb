@@ -12,7 +12,7 @@
     <ul class="small-block-grid-2">
       <% @latest_videos.to_a.last(4).each do |video| %>
         <li>
-          <%= video.title %><% if video.free? %> (FREE) <% end %>
+          <%= video.title %>
         </li>
       <% end %>
     </ul>
