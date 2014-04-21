@@ -2,6 +2,8 @@ require 'database_cleaner'
 require 'factory_girl'
 require_relative 'factories'
 
+require 'rack/test'
+
 
 module Devcasts
 end

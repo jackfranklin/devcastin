@@ -20,4 +20,5 @@ group :test do
   gem 'database_cleaner', :github => 'bmabey/database_cleaner'
   gem 'mocha'
   gem 'factory_girl'
+  gem 'rack-test'
 end
