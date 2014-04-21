@@ -1,0 +1,4 @@
+- host videos on S3
+- store videos in MongoDB
+- admin area (active admin?) for user jackfranklin from github
+- all authentication done via Github
