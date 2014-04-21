@@ -1,6 +1,4 @@
-<% if signed_in? %>
-  you are signed in
-<% end %>
+<%= current_user.name %>
 <div class="row">
   <div class="large-12 columns">
     <h3><%= @latest_video.title %></h3>
