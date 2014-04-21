@@ -5,9 +5,7 @@ module Devcasts
       #   error 404
       # end
       get '/' do
-        @latest_videos = Video.all.desc('_id').limit(5).map do |video|
-          VideoPresenter.new(video)
-        end
+        @latest_videos = Video.all.desc('_id').limit(5)
         erb :index
       end
     end

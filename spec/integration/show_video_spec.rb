@@ -36,12 +36,10 @@ describe "Show Video Page" do
   end
 
   context "logged in and purchased" do
-    let!(:purchase) { create(:purchase, charge_id: 1234, video: video) }
     let!(:paid_user) { create(:user) }
+    let!(:purchase) { create(:purchase, charge_id: 1234, video: video, user: paid_user) }
 
     it "shows the video" do
-      paid_user.purchases << purchase
-      paid_user.save!
       get url, {}, { 'rack.session' => { user_id: paid_user.id } }
       expect(last_response.body).to include(video.s3_url)
     end

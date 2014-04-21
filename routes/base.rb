@@ -8,7 +8,6 @@ module Devcasts
       # end
 
       include Devcasts::Models
-      include Devcasts::Presenters
 
       error Mongoid::Errors::DocumentNotFound do
         content_type :json

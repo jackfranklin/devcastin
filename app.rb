@@ -8,7 +8,6 @@ Bundler.require
 Dotenv.load
 
 require 'models'
-require 'presenters'
 require 'routes'
 
 require 'mongoid'

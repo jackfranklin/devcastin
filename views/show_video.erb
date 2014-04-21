@@ -7,11 +7,12 @@
 
 <div class="row">
   <div class="large-9 columns">
-    <% if current_user.has_video?(@video.video) %>
+    <% if current_user.has_video?(@video) %>
       <video id="my_video_1" class="video-js vjs-default-skin" controls
         preload="auto" width="640" height="264" data-setup="{}">
         <source src="<%= @video.s3_url %>" type='video/mp4'>
       </video>
+      <p>You paid for this video on <%= @video.created_at %>. Thank you for your support.</p>
     <% else %>
       <p>You do not have access to this video.</p>
       <a class="button large" href="/purchase/<%= @video.id %>">Purchase (&pound;3)</a>
