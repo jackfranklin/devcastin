@@ -15,7 +15,9 @@ video1 = Video.new(
   title: 'Introduction to ES6',
   description: 'lorem ipsum',
   s3_url: 'http://s3.com/123'
-).save
+)
+
+video1.save
 
 Video.new(
   title: 'Testing Angular',
@@ -34,7 +36,8 @@ video3 = Video.new(
   description: 'lorem ipsum',
   s3_url: 'http://s3.com/123',
   is_free: true
-).save
+)
+video3.save
 
 Video.new(
   title: 'Structuring Sinatra Apps',
@@ -42,20 +45,16 @@ Video.new(
   s3_url: 'http://s3.com/123'
 ).save
 
-purchase1 = Purchase.new(
-  video: video1,
-  charge_id: 1234
-)
+purchase1 = Purchase.new(charge_id: 1234)
+purchase1.video = video1
 
-purchase2 = Purchase.new(
-  video: video3,
-  charge_id: 4567
-)
+purchase2 = Purchase.new(charge_id: 4567)
+purchase2.video = video3
 
 user.purchases << purchase1
 user.purchases << purchase2
 
-purchase1.save
-purchase2.save
+purchase1.save!
+purchase2.save!
 
-user.save
+user.save!

@@ -6,7 +6,7 @@ module Devcasts
     class Purchase < BaseModel
 
       belongs_to :user
-      has_one :video
+      belongs_to :video
 
       field :charge_id, type: String
 

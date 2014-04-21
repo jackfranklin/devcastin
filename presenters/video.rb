@@ -9,6 +9,10 @@ module Devcasts
         @video = video
       end
 
+      def video
+        @video
+      end
+
       def title
         if @video.free?
           "#{@video.title} (FREE)"

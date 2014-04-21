@@ -33,9 +33,6 @@ describe Purchase do
         purchase = Purchase.new_with_charge(user: user, video: video)
         expect(purchase[:charge_id]).to eq("1234")
       end
-
     end
   end
-
-
 end

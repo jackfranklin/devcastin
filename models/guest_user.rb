@@ -9,7 +9,7 @@ module Devcasts
         0
       end
 
-      def has_video(video)
+      def has_video?(video)
         video.free?
       end
 

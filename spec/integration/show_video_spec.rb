@@ -20,7 +20,7 @@ describe "Show Video Page" do
     expect(last_response.body).to include(video.title)
   end
 
-  context "logged in" do
+  context "logged in but not purchased" do
 
     before(:each) do
       get url, {}, { 'rack.session' => { user_id: user.id } }
@@ -30,6 +30,20 @@ describe "Show Video Page" do
       expect(last_response.body).to include('JF')
     end
 
+    it "shows the purchase link" do
+      expect(last_response.body).to include('Purchase (&pound;3)')
+    end
   end
 
+  context "logged in and purchased" do
+    let!(:purchase) { create(:purchase, charge_id: 1234, video: video) }
+    let!(:paid_user) { create(:user) }
+
+    it "shows the video" do
+      paid_user.purchases << purchase
+      paid_user.save!
+      get url, {}, { 'rack.session' => { user_id: paid_user.id } }
+      expect(last_response.body).to include(video.s3_url)
+    end
+  end
 end

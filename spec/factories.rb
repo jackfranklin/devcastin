@@ -6,7 +6,7 @@ require_relative "../models/guest_user"
 
 FactoryGirl.define do
   factory :user, class: Devcasts::Models::User do
-    nickname 'jackfranklin'
+    sequence(:nickname) { |n| "jackfranklin#{n}" }
     name 'Jack Franklin'
     email 'test@test.com'
   end

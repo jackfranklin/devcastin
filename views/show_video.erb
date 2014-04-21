@@ -4,3 +4,26 @@
     <p><%= @video.description %></p>
   </div>
 </div>
+
+<div class="row">
+  <div class="large-9 columns">
+    <% if current_user.has_video?(@video.video) %>
+      <video id="my_video_1" class="video-js vjs-default-skin" controls
+        preload="auto" width="640" height="264" data-setup="{}">
+        <source src="<%= @video.s3_url %>" type='video/mp4'>
+      </video>
+    <% else %>
+      <p>You do not have access to this video.</p>
+      <a class="button large" href="/purchase/<%= @video.id %>">Purchase (&pound;3)</a>
+    <% end %>
+  </div>
+  <div class="large-3 columns">
+    <h4>Topics covered</h4>
+    <ul>
+      <li>Topic 1</li>
+      <li>Topic 2</li>
+      <li>Topic 3</li>
+      <li>Topic 4</li>
+    </ul>
+  </div>
+</div>

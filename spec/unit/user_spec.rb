@@ -36,8 +36,8 @@ describe User do
       user = build(:user)
       purchase1 = build(:purchase, user: user)
       purchase2 = build(:purchase, user: user)
-      videos = [build(:video, purchase: purchase1),
-                build(:video, purchase: purchase2)]
+      videos = [build(:video, purchases: [purchase1]),
+                build(:video, purchases: [purchase2])]
 
       user_videos = user.videos
       expect(user_videos[0]).to eq(videos[0])
@@ -45,18 +45,18 @@ describe User do
     end
   end
 
-  describe "#has_video" do
+  describe "#has_video?" do
     it "is true if the user has purchased the video" do
       user = build(:user)
       purchase = build(:purchase, user: user)
-      video = build(:video, purchase: purchase)
-      expect(user.has_video(video)).to be_true
+      video = build(:video, purchases: [purchase])
+      expect(user.has_video?(video)).to be_true
     end
 
     it "is true if the video is free" do
       user = build(:user)
       video = build(:video, is_free: true)
-      expect(user.has_video(video)).to be_true
+      expect(user.has_video?(video)).to be_true
 
     end
 
@@ -64,8 +64,8 @@ describe User do
       user = build(:user)
       user2 = build(:user)
       purchase = build(:purchase, user: user2)
-      video = build(:video, purchase: purchase)
-      expect(user.has_video(video)).to be_false
+      video = build(:video, purchases: [purchase])
+      expect(user.has_video?(video)).to be_false
     end
   end
 end

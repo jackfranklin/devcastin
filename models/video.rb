@@ -3,7 +3,7 @@ module Devcasts
   module Models
     class Video < BaseModel
 
-      belongs_to :purchase
+      has_many :purchases
 
       validates :title, uniqueness: true
 

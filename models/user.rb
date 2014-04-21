@@ -28,7 +28,7 @@ module Devcasts
         self.purchases.map(&:video)
       end
 
-      def has_video(video)
+      def has_video?(video)
         video.free? || self.purchases.any? do |purchase|
           purchase.video == video
         end
