@@ -13,4 +13,13 @@ describe Video do
       expect(build(:video, is_free: false).free?).to be_false
     end
   end
+
+  describe "#purchase_for_user" do
+    it "finds the purchase for the current user" do
+      user = build(:user)
+      video = build(:video)
+      purchase = build(:purchase, video: video, user: user)
+      expect(video.purchase_for_user(user)).to eq(purchase)
+    end
+  end
 end

@@ -15,7 +15,7 @@
       <% if @video.free? %>
         <p>This video is free!</p>
       <% else %>
-        <p>You paid for this video on <%= @video.created_at %>. Thank you for your support.</p>
+        <p>You paid for this video on <%= @video.purchase_for_user(current_user).created_at %>.</p>
       <% end %>
     <% else %>
       <p>You do not have access to this video.</p>

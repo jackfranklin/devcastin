@@ -37,9 +37,4 @@ describe "Index Page" do
     get '/'
     expect(last_response.body).to include('Test Video')
   end
-
-  it "marks videos as free" do
-    get '/'
-    expect(last_response.body).to include('Free Video (FREE)')
-  end
 end

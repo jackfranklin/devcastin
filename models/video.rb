@@ -20,6 +20,10 @@ module Devcasts
         self.is_free
       end
 
+      def purchase_for_user(user)
+        self.purchases.select { |p| p.user == user }.first
+      end
+
     end
   end
 end
