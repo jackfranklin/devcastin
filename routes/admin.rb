@@ -8,6 +8,7 @@ module Devcasts
 
       get '/admin' do
         @videos = Video.unscoped.all
+        @emails = EarlyAccess.all
 
         erb :admin_index
       end

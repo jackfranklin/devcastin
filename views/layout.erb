@@ -14,7 +14,7 @@
   </head>
 </head>
 <body>
-  <% if ENV["PREVIEW_MODE"] %>
+  <% if ENV["PREVIEW_MODE"] && !current_user.name == 'Jack Franklin' %>
     <div class="preview-mode">
       <img src="/img/logo.jpg" />
       <h1>Devcast.in</h1>

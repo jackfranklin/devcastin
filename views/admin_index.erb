@@ -39,4 +39,23 @@
       </tbody>
     </table>
   </div>
+  <div class="large-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @emails.each do |email| %>
+          <tr>
+            <td>
+              <%= email.email %>
+            </td>
+            <td><%= email.created_at.stamp('1st of Jan 1992') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 </div>
