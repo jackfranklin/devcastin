@@ -5,5 +5,6 @@ module Devcasts
     autoload :Auth, 'routes/auth'
     autoload :ShowVideo, 'routes/show_video'
     autoload :NewPurchase, 'routes/new_purchase'
+    autoload :UserProfile, 'routes/user_profile'
   end
 end

@@ -39,6 +39,7 @@ module Devcasts
     use Routes::Auth
     use Routes::NewPurchase
     use Routes::ShowVideo
+    use Routes::UserProfile
 
 
   end
