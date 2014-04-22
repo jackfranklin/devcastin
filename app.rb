@@ -40,6 +40,7 @@ module Devcasts
     use Routes::NewPurchase
     use Routes::ShowVideo
     use Routes::UserProfile
+    use Routes::Admin
 
 
   end

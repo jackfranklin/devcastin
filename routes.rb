@@ -6,5 +6,6 @@ module Devcasts
     autoload :ShowVideo, 'routes/show_video'
     autoload :NewPurchase, 'routes/new_purchase'
     autoload :UserProfile, 'routes/user_profile'
+    autoload :Admin, 'routes/admin'
   end
 end

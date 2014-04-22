@@ -11,6 +11,8 @@ gem 'mongoid'
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
+gem 'stamp'
+
 group :development do
   gem 'shotgun'
 end

@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="large-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Purchases</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @videos.each do |video| %>
+          <tr>
+            <td>
+              <%= video.title %>
+              <% if video.free? %>
+                <span class="label">Free</span>
+              <% end %>
+            </td>
+            <td><%= video.created_at.stamp('1st of Jan 1992') %></td>
+            <td><%= video.purchases.length %></td>
+            <td>
+              <% unless video.free? %>
+                <a href="/admin/make_free/<%= video.id %>">Make Free</a> |
+              <% end %>
+              <a href="/admin/purchases/<%= video.id %>">View Purchases</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
