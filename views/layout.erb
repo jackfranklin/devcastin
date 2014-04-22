@@ -25,6 +25,8 @@
 
         <% if signed_in? %>
           <li><a href="/logout">Logout</a></li>
+        <% else %>
+          <li><a href="/auth/github">Log In / Sign Up</a></li>
         <% end %>
       </ul>
 

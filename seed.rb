@@ -14,7 +14,7 @@ user = User.create_or_get_from_omniauth(
 video1 = Video.new(
   title: 'Introduction to ES6',
   description: 'lorem ipsum',
-  s3_url: 'http://s3.com/123'
+  s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4'
 )
 
 video1.save
@@ -22,19 +22,19 @@ video1.save
 Video.new(
   title: 'Testing Angular',
   description: 'lorem ipsum',
-  s3_url: 'http://s3.com/123'
+  s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4'
 ).save
 
 Video.new(
   title: 'Mocking in Ruby with Mocha',
   description: 'lorem ipsum',
-  s3_url: 'http://s3.com/123'
+  s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4'
 ).save
 
 video3 = Video.new(
   title: 'Syntastic and Vim',
   description: 'lorem ipsum',
-  s3_url: 'http://s3.com/123',
+  s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
   is_free: true
 )
 video3.save
@@ -42,7 +42,7 @@ video3.save
 Video.new(
   title: 'Structuring Sinatra Apps',
   description: 'lorem ipsum',
-  s3_url: 'http://s3.com/123'
+  s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4'
 ).save
 
 purchase1 = Purchase.new(charge_id: 1234)

@@ -12,7 +12,7 @@
     <ul class="small-block-grid-2">
       <% @latest_videos.to_a.last(4).each do |video| %>
         <li>
-          <a href="<%= video.path %>"><%= video.title %></a>
+          <a href="/videos/<%= video.id %>"><%= video.title %></a>
         </li>
       <% end %>
     </ul>
