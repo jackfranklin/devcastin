@@ -3,10 +3,13 @@ require 'factory_girl'
 require_relative 'factories'
 
 require 'rack/test'
+require 'omniauth'
 
 
 module Devcasts
 end
+
+OmniAuth.config.test_mode = true
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

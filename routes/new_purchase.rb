@@ -13,6 +13,12 @@ module Devcasts
         end
 
         @video = Video.find(params[:video_id])
+
+        if current_user.has_video?(@video)
+          redirect "/videos/#{@video.id}"
+        end
+
+
         erb :new_purchase
       end
 
