@@ -11,33 +11,41 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <nav class="top-bar" data-topbar>
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">Devcast.in</a></h1>
-      </li>
-    </ul>
-
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li><a href="/user/<%= current_user.id %>"><%= current_user.name %></a></li>
-
-        <% if signed_in? %>
-          <li><a href="/logout">Logout</a></li>
-        <% else %>
-          <li><a href="/auth/github">Log In / Sign Up</a></li>
-        <% end %>
+  <% if ENV["PREVIEW_MODE"] %>
+    <div class="preview-mode">
+      <h1>Devcast.in</h1>
+      <p>Short, focused screencasts for web developers. Coming soon.</p>
+      <a href="http://twitter.com/devcastin">Follow on Twitter for updates.</a>
+    </div>
+  <% else %>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="/">Devcast.in</a></h1>
+        </li>
       </ul>
 
-      <!-- Left Nav Section -->
-      <ul class="left">
-        <li><a href="#">Left Nav Button</a></li>
-      </ul>
-    </section>
-  </nav>
-  <div class="content">
-    <%= yield %>
-  </div>
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li><a href="/user/<%= current_user.id %>"><%= current_user.name %></a></li>
+
+          <% if signed_in? %>
+            <li><a href="/logout">Logout</a></li>
+          <% else %>
+            <li><a href="/auth/github">Log In / Sign Up</a></li>
+          <% end %>
+        </ul>
+
+        <!-- Left Nav Section -->
+        <ul class="left">
+          <li><a href="#">Left Nav Button</a></li>
+        </ul>
+      </section>
+    </nav>
+    <div class="content">
+      <%= yield %>
+    </div>
+  <% end %>
 </body>
 </html> 
