@@ -7,43 +7,44 @@
   </div>
 <% end %>
 
-<div class="row">
-  <div class="large-8 columns">
-    <div class="latest-video">
-      <h2>
-        <a href="/videos/<%= @latest_videos[0].id %>">
-          <%= @latest_videos[0].title %>
-        </a>
-        <small><%= @latest_videos[0].created_at.stamp('1st of January 1992') %></small>
-      </h2>
-      <p><%= @latest_videos[0].description %></p>
-      <p>Topics covered: <%= @latest_videos[0].topics.join(", ") %>.</p>
-      <% if current_user.has_video?(@latest_videos[0]) %>
-        <a href="/videos/<%= @latest_videos[0].id %>" class="button large">Watch Now</a>
-      <% else %>
-        <a class="button large" href="/purchase/<%= @latest_videos[0].id %>">Purchase (&pound;3)</a>
-      <% end %>
-    </div>
-    <div class="older-videos">
-      <h3>Other Recent Videos</h3>
-      <ul class="small-block-grid-2">
-        <% @latest_videos.to_a.last(4).each do |video| %>
-          <li>
-            <h4>
-              <a href="/videos/<%= video.id %>"><%= video.title %></a><br>
-              <small><%= video.created_at.stamp('1st of January 1992') %></small>
-            </h4>
-            <p>Topics covered: <%= video.topics.join(", ") %>.</p>
-            <% if current_user.has_video?(video) %>
-              <a href="/videos/<%= video.id %>" class="button small">Watch Now</a>
-            <% else %>
-              <a class="button small" href="/purchase/<%= video.id %>">Purchase (&pound;3)</a>
-            <% end %>
-          </li>
+<% if Video.all.length > 0 %>
+  <div class="row">
+    <div class="large-8 columns">
+      <div class="latest-video">
+        <h2>
+          <a href="/videos/<%= @latest_videos[0].id %>">
+            <%= @latest_videos[0].title %>
+          </a>
+          <small><%= @latest_videos[0].created_at.stamp('1st of January 1992') %></small>
+        </h2>
+        <p><%= @latest_videos[0].description %></p>
+        <p>Topics covered: <%= @latest_videos[0].topics.join(", ") %>.</p>
+        <% if current_user.has_video?(@latest_videos[0]) %>
+          <a href="/videos/<%= @latest_videos[0].id %>" class="button large">Watch Now</a>
+        <% else %>
+          <a class="button large" href="/purchase/<%= @latest_videos[0].id %>">Purchase (&pound;3)</a>
         <% end %>
-      </ul>
+      </div>
+      <div class="older-videos">
+        <h3>Other Recent Videos</h3>
+        <ul class="small-block-grid-2">
+          <% @latest_videos.to_a.last(4).each do |video| %>
+            <li>
+              <h4>
+                <a href="/videos/<%= video.id %>"><%= video.title %></a><br>
+                <small><%= video.created_at.stamp('1st of January 1992') %></small>
+              </h4>
+              <p>Topics covered: <%= video.topics.join(", ") %>.</p>
+              <% if current_user.has_video?(video) %>
+                <a href="/videos/<%= video.id %>" class="button small">Watch Now</a>
+              <% else %>
+                <a class="button small" href="/purchase/<%= video.id %>">Purchase (&pound;3)</a>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
+    <%= erb :search_sidebar %>
   </div>
-  <%= erb :search_sidebar %>
-
-</div>
+<% end %>
