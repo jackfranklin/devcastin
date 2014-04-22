@@ -44,28 +44,6 @@
       </ul>
     </div>
   </div>
+  <%= erb :search_sidebar %>
 
-  <div class="large-3 large-offset-1 columns">
-    <form action="/search" method="get">
-      <h3>Search</h3>
-      <p>Search for a particular topic, framework or language.</p>
-      <div class="row collapse">
-        <div class="small-9 columns">
-          <input type="text" name="text" placeholder='javascript' />
-        </div>
-        <div class="small-3 columns">
-          <input type="submit" value="Search" class="postfix button">
-        </div>
-      </div>
-    </form>
-
-
-    <h3>Archives</h3>
-    <p>Devcast.in features <%= Video.all.length %> videos on a number of topics. <a href="/archives">View the archives</a> to find the video you're looking for.</a></p>
-
-    <h3>About</h3>
-    <p>Devcasts are short, focused videos on a particular topic. <a href="/about">Find out more</a>.</p>
-
-
-  </div>
 </div>

@@ -7,5 +7,6 @@ module Devcasts
     autoload :NewPurchase, 'routes/new_purchase'
     autoload :UserProfile, 'routes/user_profile'
     autoload :Admin, 'routes/admin'
+    autoload :Archive, 'routes/archive'
   end
 end

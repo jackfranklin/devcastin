@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="large-8 columns">
+    <h2>Archives</h2>
+    <ul class="small-block-grid-3">
+      <% @videos.each do |video| %>
+        <li>
+          <h4>
+            <a href="/videos/<%= video.id %>"><%= video.title %></a>
+            <% if video.free? %>
+              <span class="label">Free</span>
+            <% end %>
+            <br>
+            <small><%= video.created_at.stamp('1st of January 1992') %></small>
+          </h4>
+          <p>Topics covered: <%= video.topics.join(", ") %>.</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= erb :search_sidebar %>
+</div>

@@ -41,7 +41,7 @@ module Devcasts
     use Routes::ShowVideo
     use Routes::UserProfile
     use Routes::Admin
-
+    use Routes::Archive
 
   end
 
