@@ -1,1 +1,10 @@
-Thanks, your purchase of '<%= @video.title %>' has been confirmed.
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>Purchase Successful</h1>
+      <p> Thanks, your purchase of '<%= @video.title %>' has been confirmed. </p>
+      <p>
+        <a href="/videos/<%= @video.id %>">Watch Video</a> |
+        <a href="<%= @s3_url %>">Download Video</a>
+      </p>
+    </div>
+  </div>

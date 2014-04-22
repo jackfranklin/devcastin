@@ -49,6 +49,7 @@ module Devcasts
 
       get '/purchase/confirmed/:video_id' do
         @video = Video.find(params[:video_id])
+        @s3_url = get_hour_s3_url(@video)
         erb :confirmed_purchase
       end
 
@@ -60,12 +61,11 @@ module Devcasts
 <p>Dear #{current_user.name},</p>
 <p>You have succesfully purchased "#{video.title}". You can download the video at the following URL:</p>
 <p>#{s3_url}</p>
-<p>The above URL will expire after one hour of this email being sent. You can always get a new URL and stream the video at: http://devcasts.in/videos/#{video.id}.</p>
+<p>The above URL will expire after one hour of this email being sent. You can always get a new URL and stream the video at: http://devcast.in/videos/#{video.id}.</p>
 <p>If you have any questions or problems please reply to this email.</p>
 <p>Thank you for your support,</p>
 <p>Jack Franklin.</p>
 EML
-      puts content
       Devcasts::Mailer.new(current_user.email, 'Purchase from Devcast.in', content).send
       end
     end
