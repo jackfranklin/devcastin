@@ -50,6 +50,7 @@ module Devcasts
     use Routes::Archive
     use Routes::About
     use Routes::Search
+    use Routes::EarlyAccessSave
 
   end
 

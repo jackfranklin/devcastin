@@ -10,5 +10,6 @@ module Devcasts
     autoload :Archive, 'routes/archive'
     autoload :About, 'routes/about'
     autoload :Search, 'routes/search'
+    autoload :EarlyAccessSave, 'routes/early_access_save'
   end
 end

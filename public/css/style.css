@@ -11,3 +11,7 @@
   width: 150px;
   margin: 10px auto;
 }
+
+.preview-mode form, .preview-mode .alert-box {
+  margin-top: 20px;
+}
