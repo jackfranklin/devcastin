@@ -41,6 +41,7 @@ module Devcasts
 
     use Rack::Deflater
 
+    use Routes::EarlyAccessSave
     use Routes::Index
     use Routes::Auth
     use Routes::NewPurchase
@@ -50,7 +51,6 @@ module Devcasts
     use Routes::Archive
     use Routes::About
     use Routes::Search
-    use Routes::EarlyAccessSave
 
   end
 
