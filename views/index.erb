@@ -1,21 +1,71 @@
-<div class="row">
-  <div class="large-12 columns">
-    <h3>Latest Video</h3>
-    <h2><%= @latest_videos[0].title %></h2>
-    <p><%= @latest_videos[0].description %></p>
+<% unless signed_in? %>
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>Welcome to Devcast.in</h1>
+      <p>Short, focused screencasts for developers.</p>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="row">
-  <div class="large-12 columns">
-    <h4>More recent videos</h4>
-    <ul class="small-block-grid-2">
-      <% @latest_videos.to_a.last(4).each do |video| %>
-        <li>
-          <a href="/videos/<%= video.id %>"><%= video.title %></a>
-        </li>
+  <div class="large-8 columns">
+    <div class="latest-video">
+      <h2>
+        <a href="/videos/<%= @latest_videos[0].id %>">
+          <%= @latest_videos[0].title %>
+        </a>
+        <small><%= @latest_videos[0].created_at.stamp('1st of January 1992') %></small>
+      </h2>
+      <p><%= @latest_videos[0].description %></p>
+      <p>Topics covered: <%= @latest_videos[0].topics.join(", ") %>.</p>
+      <% if current_user.has_video?(@latest_videos[0]) %>
+        <a href="/videos/<%= @latest_videos[0].id %>" class="button large">Watch Now</a>
+      <% else %>
+        <a class="button large" href="/purchase/<%= @latest_videos[0].id %>">Purchase (&pound;3)</a>
       <% end %>
-    </ul>
+    </div>
+    <div class="older-videos">
+      <h3>Other Recent Videos</h3>
+      <ul class="small-block-grid-2">
+        <% @latest_videos.to_a.last(4).each do |video| %>
+          <li>
+            <h4>
+              <a href="/videos/<%= video.id %>"><%= video.title %></a><br>
+              <small><%= video.created_at.stamp('1st of January 1992') %></small>
+            </h4>
+            <p>Topics covered: <%= video.topics.join(", ") %>.</p>
+            <% if current_user.has_video?(video) %>
+              <a href="/videos/<%= video.id %>" class="button small">Watch Now</a>
+            <% else %>
+              <a class="button small" href="/purchase/<%= video.id %>">Purchase (&pound;3)</a>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="large-3 large-offset-1 columns">
+    <form action="/search" method="get">
+      <h3>Search</h3>
+      <p>Search for a particular topic, framework or language.</p>
+      <div class="row collapse">
+        <div class="small-9 columns">
+          <input type="text" name="text" placeholder='javascript' />
+        </div>
+        <div class="small-3 columns">
+          <input type="submit" value="Search" class="postfix button">
+        </div>
+      </div>
+    </form>
+
+
+    <h3>Archives</h3>
+    <p>Devcast.in features <%= Video.all.length %> videos on a number of topics. <a href="/archives">View the archives</a> to find the video you're looking for.</a></p>
+
+    <h3>About</h3>
+    <p>Devcasts are short, focused videos on a particular topic. <a href="/about">Find out more</a>.</p>
+
+
   </div>
 </div>
-

@@ -11,6 +11,7 @@ module Devcasts
       field :description, type: String
       field :s3_url, type: String
       field :is_free, type: Boolean, default: false
+      field :topics, type: Array, default: []
 
       def id
         self["_id"]
