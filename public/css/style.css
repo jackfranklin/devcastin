@@ -5,3 +5,9 @@
   height: 300px;
   margin: 200px auto;
 }
+
+.preview-mode img {
+  display: block;
+  width: 150px;
+  margin: 10px auto;
+}
