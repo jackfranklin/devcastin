@@ -7,11 +7,10 @@ end
 
 describe "Index Page" do
   let!(:user) { create(:user, name: 'JF') }
-  let!(:video1) { create(:video) }
-  let!(:video2) { create(:video) }
-  let!(:video3) { create(:video) }
-  let!(:video4) { create(:video, :is_free, title: 'Free Video') }
-  let!(:video5) { create(:video, title: 'Test Video') }
+  before(:all) do
+    create(:video, :is_free, title: 'Free Video')
+    create(:video, title: 'Test Video')
+  end
 
   include Rack::Test::Methods
 
