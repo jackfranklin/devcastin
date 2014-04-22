@@ -26,7 +26,8 @@ module Devcasts
     end
 
     Mongoid.load!("mongoid.yml", ENV['RACK_ENV'])
-    # Mongoid.raise_not_found_error = false
+
+    Stripe.api_key = ENV["STRIPE_TEST_SECRET"]
 
     use OmniAuth::Builder do
       provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
@@ -36,6 +37,7 @@ module Devcasts
 
     use Routes::Index
     use Routes::Auth
+    use Routes::NewPurchase
     use Routes::ShowVideo
 
 

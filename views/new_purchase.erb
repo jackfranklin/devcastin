@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1><%= @video.title %></h1>
+    <p><%= @video.description %></p>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <p>Click the link below to have your payment processed via Stripe.</p>
+    <p>Once purchased the video will be added to your account and you will be emailed a download link.</p>
+    <form action="/purchase/<%= @video.id %>" method="post">
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= ENV["STRIPE_TEST_PUBLISH"] %>"
+        data-description="Purchase of '<%= @video.title %>'"
+      data-amount="300" data-currency="gbp"></script>
+    </form>
+  </div>
+</div>

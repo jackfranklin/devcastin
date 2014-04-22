@@ -12,7 +12,11 @@
         preload="auto" width="640" height="264" data-setup="{}">
         <source src="<%= @video.s3_url %>" type='video/mp4'>
       </video>
-      <p>You paid for this video on <%= @video.created_at %>. Thank you for your support.</p>
+      <% if @video.free? %>
+        <p>This video is free!</p>
+      <% else %>
+        <p>You paid for this video on <%= @video.created_at %>. Thank you for your support.</p>
+      <% end %>
     <% else %>
       <p>You do not have access to this video.</p>
       <a class="button large" href="/purchase/<%= @video.id %>">Purchase (&pound;3)</a>
