@@ -9,6 +9,7 @@ Dotenv.load
 
 require 'models'
 require 'routes'
+require 'mailer'
 
 require 'mongoid'
 
@@ -33,6 +34,11 @@ module Devcasts
       provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
     end
 
+    AWS.config(
+      :access_key_id => ENV["S3_ACCESS"],
+      :secret_access_key => ENV["S3_SECRET"]
+    )
+
     use Rack::Deflater
 
     use Routes::Index
@@ -42,6 +48,8 @@ module Devcasts
     use Routes::UserProfile
     use Routes::Admin
     use Routes::Archive
+    use Routes::About
+    use Routes::Search
 
   end
 

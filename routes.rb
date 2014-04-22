@@ -8,5 +8,7 @@ module Devcasts
     autoload :UserProfile, 'routes/user_profile'
     autoload :Admin, 'routes/admin'
     autoload :Archive, 'routes/archive'
+    autoload :About, 'routes/about'
+    autoload :Search, 'routes/search'
   end
 end

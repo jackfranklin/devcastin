@@ -7,9 +7,26 @@ module Devcasts
       end
 
       get '/admin' do
-        @videos = Video.all
+        @videos = Video.unscoped.all
 
         erb :admin_index
+      end
+
+      get '/admin/new' do
+        erb :admin_new_video
+      end
+
+      post '/admin/new' do
+        params[:topics] = params[:topics].split(',').map(&:strip)
+        Video.new(params).save
+        redirect "/admin"
+      end
+
+      get '/admin/publish/:video_id' do
+        video = Video.unscoped.find(params[:video_id])
+        video.published = true
+        video.save
+        redirect "/admin"
       end
 
       get '/admin/make_free/:video_id' do

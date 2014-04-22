@@ -1,5 +1,6 @@
 <div class="row">
   <div class="large-12 columns">
+    <p><a href="/admin/new">New Video</a></p>
     <table>
       <thead>
         <tr>
@@ -17,12 +18,19 @@
               <% if video.free? %>
                 <span class="label">Free</span>
               <% end %>
+              <% unless video.published? %>
+                <span class="label">Unpublished</span>
+              <% end %>
+
             </td>
             <td><%= video.created_at.stamp('1st of Jan 1992') %></td>
             <td><%= video.purchases.length %></td>
             <td>
               <% unless video.free? %>
                 <a href="/admin/make_free/<%= video.id %>">Make Free</a> |
+              <% end %>
+              <% unless video.published? %>
+                <a href="/admin/publish/<%= video.id %>">Publish</a> |
               <% end %>
               <a href="/admin/purchases/<%= video.id %>">View Purchases</a>
             </td>

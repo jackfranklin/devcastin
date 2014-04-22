@@ -19,7 +19,8 @@ video1 = Video.new(
   title: 'Introduction to ES6',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
-  topics: ['ES6', 'JavaScript']
+  topics: ['ES6', 'JavaScript'],
+  published: true
 )
 
 video1.save
@@ -28,14 +29,16 @@ Video.new(
   title: 'Testing Angular',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
-  topics: ['AngularJS', 'Testing', 'Karma']
+  topics: ['AngularJS', 'Testing', 'Karma'],
+  published: true
 ).save
 
 Video.new(
   title: 'Mocking in Ruby with Mocha',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
-  topics: ['Testing Ruby', 'Test Mocks', 'Mocha Gem']
+  topics: ['Testing Ruby', 'Test Mocks', 'Mocha Gem'],
+  published: true
 ).save
 
 video3 = Video.new(
@@ -43,7 +46,8 @@ video3 = Video.new(
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
   is_free: true,
-  topics: ['Vim', 'Vim Plugins']
+  topics: ['Vim', 'Vim Plugins'],
+  published: true
 
 )
 video3.save
@@ -52,7 +56,8 @@ Video.new(
   title: 'Structuring Sinatra Apps',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
-  topics: ['Designing Applications', 'Sinatra Apps']
+  topics: ['Designing Applications', 'Sinatra Apps'],
+  published: true
 ).save
 
 purchase1 = Purchase.new(charge_id: 1234)

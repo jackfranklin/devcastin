@@ -12,6 +12,9 @@ module Devcasts
       field :s3_url, type: String
       field :is_free, type: Boolean, default: false
       field :topics, type: Array, default: []
+      field :published, type: Boolean, default: false
+
+      default_scope where(published: true)
 
       def id
         self["_id"]

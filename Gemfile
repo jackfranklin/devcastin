@@ -13,6 +13,10 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 gem 'stamp'
 
+gem 'aws-sdk', '~> 1.0'
+
+gem 'mail'
+
 group :development do
   gem 'shotgun'
 end
