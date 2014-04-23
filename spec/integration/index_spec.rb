@@ -2,11 +2,17 @@ require 'spec_helper'
 
 describe "Index Page" do
   let!(:user) { create(:user, name: 'JF') }
+  before(:all) { create(:video, title: 'Test Video') }
 
   context "guest user" do
     it "should show the guest user text" do
       get '/'
       expect(last_response.body).to include('Guest User')
+    end
+
+    it "shows the latest video" do
+      get '/'
+      expect(last_response.body).to include('Test Video')
     end
   end
 
@@ -19,11 +25,9 @@ describe "Index Page" do
       expect(last_response.body).to include('JF')
     end
 
+    it "shows the latest video" do
+      expect(last_response.body).to include('Test Video')
+    end
   end
 
-  it "shows the latest video" do
-    create(:video, title: 'Test Video')
-    get '/'
-    expect(last_response.body).to include('Test Video')
-  end
 end

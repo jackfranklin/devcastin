@@ -16,11 +16,21 @@ def app
 end
 
 OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+  :info => {
+    :nickname => 'jackfranklin',
+    :name => 'Jack Franklin',
+    :email => 'jack@jackfranklin.net'
+  }
+})
+
 Capybara.app = Devcasts::App
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
+  config.include Capybara::DSL
   config.include FactoryGirl::Syntax::Methods
+  config.include Devcasts::Models
   config.mock_with :mocha
   config.before(:suite) do
     Mongoid.load!("mongoid.yml", :test)
