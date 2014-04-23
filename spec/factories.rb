@@ -21,6 +21,7 @@ FactoryGirl.define do
     sequence(:title) { |n| "Video #{n}" }
     description 'lorem ipsum'
     s3_url 'someurl.com'
+    published true
 
     trait :is_free do
       is_free true
@@ -28,6 +29,10 @@ FactoryGirl.define do
 
     trait :is_paid do
       is_free false
+    end
+
+    trait :unpublished do
+      published false
     end
 
   end

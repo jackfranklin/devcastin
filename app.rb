@@ -15,6 +15,11 @@ require 'mongoid'
 
 module Devcasts
   class App < Sinatra::Application
+
+    class << self
+      attr_accessor :env
+    end
+
     configure do
       disable :method_override
       disable :static
@@ -26,7 +31,7 @@ module Devcasts
           :secret       => ENV['SESSION_SECRET']
     end
 
-    Mongoid.load!("mongoid.yml", ENV['RACK_ENV'])
+    Mongoid.load!("mongoid.yml", App.env)
 
     Stripe.api_key = ENV["STRIPE_TEST_SECRET"]
 

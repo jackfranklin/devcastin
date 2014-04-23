@@ -1,16 +1,13 @@
-require_relative '../../app'
 require 'spec_helper'
+require_relative '../../app'
 
 def app
+  Devcasts::App.env = :test
   Devcasts::App
 end
 
 describe "Index Page" do
   let!(:user) { create(:user, name: 'JF') }
-  before(:all) do
-    create(:video, :is_free, title: 'Free Video')
-    create(:video, title: 'Test Video')
-  end
 
   include Rack::Test::Methods
 
@@ -33,6 +30,7 @@ describe "Index Page" do
   end
 
   it "shows the latest video" do
+    create(:video, title: 'Test Video')
     get '/'
     expect(last_response.body).to include('Test Video')
   end
