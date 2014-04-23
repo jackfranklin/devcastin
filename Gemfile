@@ -19,6 +19,8 @@ gem 'aws-sdk', '~> 1.0'
 
 gem 'mail'
 
+gem 'thin'
+
 group :development do
   gem 'shotgun'
   gem 'pry'
