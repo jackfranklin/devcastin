@@ -5,7 +5,7 @@ require 'bundler'
 
 Bundler.require
 
-Dotenv.load
+Dotenv.load unless ENV["RACK_ENV"] == "production"
 
 require 'models'
 require 'routes'
