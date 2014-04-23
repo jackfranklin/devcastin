@@ -14,31 +14,7 @@
   </head>
 </head>
 <body>
-  <% if ENV["PREVIEW_MODE"] %>
-    <div class="preview-mode">
-      <img src="/img/logo.jpg" />
-      <h1>Devcast.in</h1>
-      <p>Short, focused screencasts for web developers. Coming soon.</p>
-      <a href="http://twitter.com/devcastin">Follow on Twitter for updates.</a>
-      <% if params[:saved] %>
-        <div data-alert class="alert-box">
-          Your email address has been added to the list. Thank you for your early interest in Devcast.in.
-        </div>
-      <% else %>
-        <form action="/early_access" method="post">
-          <p>Enter your email for early access. You won't be spammed, and you can unsubscribe at any time.</p>
-          <div class="row collapse">
-            <div class="small-9 columns">
-              <input type="text" name="email" placeholder='me@mydomain.com' />
-            </div>
-            <div class="small-3 columns">
-              <input type="submit" value="Save" class="postfix button">
-            </div>
-          </div>
-        </form>
-      <% end %>
-    </div>
-  <% else %>
+  <% if !Devcasts::App.preview_mode || (Devcasts::App.preview_mode && signed_in?) %>
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
         <li class="name">
@@ -64,10 +40,10 @@
         </ul>
       </section>
     </nav>
-    <div class="content">
-      <%= yield %>
-    </div>
   <% end %>
+  <div class="content">
+    <%= yield %>
+  </div>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

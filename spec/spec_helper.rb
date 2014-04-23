@@ -12,8 +12,11 @@ end
 
 def app
   Devcasts::App.env = :test
+  Devcasts::App.preview_mode = false
   Devcasts::App
 end
+
+Capybara.app = app
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
@@ -24,7 +27,6 @@ OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
   }
 })
 
-Capybara.app = Devcasts::App
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods

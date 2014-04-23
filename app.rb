@@ -5,7 +5,7 @@ require 'bundler'
 
 Bundler.require
 
-Dotenv.load unless ENV["RACK_ENV"] == "production"
+Dotenv.load unless ENV["RACK_ENV"] == "test"
 
 require 'models'
 require 'routes'
@@ -18,6 +18,7 @@ module Devcasts
 
     class << self
       attr_accessor :env
+      attr_accessor :preview_mode
     end
 
     configure do
@@ -32,6 +33,8 @@ module Devcasts
     end
 
     Mongoid.load!("mongoid.yml", App.env)
+
+    Devcasts::App.preview_mode = ENV["PREVIEW_MODE"]
 
     Stripe.api_key = ENV["STRIPE_TEST_SECRET"]
 
@@ -58,5 +61,5 @@ module Devcasts
     use Routes::Search
 
   end
-
 end
+

@@ -1,0 +1,23 @@
+<div class="preview-mode">
+  <img src="/img/logo.jpg" />
+  <h1>Devcast.in</h1>
+  <p>Short, focused screencasts for web developers. Coming soon.</p>
+  <a href="http://twitter.com/devcastin">Follow on Twitter for updates.</a>
+  <% if params[:saved] %>
+    <div data-alert class="alert-box">
+      Your email address has been added to the list. Thank you for your early interest in Devcast.in.
+    </div>
+  <% else %>
+    <form action="/early_access" method="post">
+      <p>Enter your email for early access. You won't be spammed, and you can unsubscribe at any time.</p>
+      <div class="row collapse">
+        <div class="small-9 columns">
+          <input type="text" name="email" placeholder='me@mydomain.com' />
+        </div>
+        <div class="small-3 columns">
+          <input type="submit" value="Save" class="postfix button">
+        </div>
+      </div>
+    </form>
+  <% end %>
+</div>
