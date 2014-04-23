@@ -39,6 +39,10 @@ RSpec.configure do |config|
     DatabaseCleaner[:mongoid].clean_with(:truncation)
   end
 
+  config.before(:all) do
+    Devcasts::Mailer.any_instance.stubs(:send)
+  end
+
   config.before(:each) do
     DatabaseCleaner.start
   end
