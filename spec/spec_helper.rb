@@ -1,17 +1,25 @@
 require 'database_cleaner'
 require 'factory_girl'
-require_relative 'factories'
-
+require 'capybara/rspec'
 require 'rack/test'
 require 'omniauth'
 
+require_relative 'factories'
+require_relative '../app'
 
 module Devcasts
 end
 
+def app
+  Devcasts::App.env = :test
+  Devcasts::App
+end
+
 OmniAuth.config.test_mode = true
+Capybara.app = Devcasts::App
 
 RSpec.configure do |config|
+  config.include Rack::Test::Methods
   config.include FactoryGirl::Syntax::Methods
   config.mock_with :mocha
   config.before(:suite) do

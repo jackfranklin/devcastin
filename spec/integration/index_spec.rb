@@ -1,15 +1,7 @@
 require 'spec_helper'
-require_relative '../../app'
-
-def app
-  Devcasts::App.env = :test
-  Devcasts::App
-end
 
 describe "Index Page" do
   let!(:user) { create(:user, name: 'JF') }
-
-  include Rack::Test::Methods
 
   context "guest user" do
     it "should show the guest user text" do

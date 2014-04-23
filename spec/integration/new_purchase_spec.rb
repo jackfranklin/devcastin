@@ -1,14 +1,6 @@
-require_relative '../../app'
 require 'spec_helper'
 
-def app
-  Devcasts::App
-end
-
 describe "New Purchase Page" do
-  include Rack::Test::Methods
-
-
   let!(:video) { create(:video) }
   let(:url) { "/purchase/#{video.id}" }
 

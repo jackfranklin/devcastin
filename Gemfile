@@ -1,3 +1,5 @@
+ruby '2.0.0'
+
 source 'http://rubygems.org'
 
 gem 'sinatra', require: 'sinatra/base'
@@ -27,5 +29,6 @@ group :test do
   gem 'mocha'
   gem 'factory_girl'
   gem 'rack-test'
+  gem 'capybara'
 end
 

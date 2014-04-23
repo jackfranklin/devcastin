@@ -1,15 +1,8 @@
-require_relative '../../app'
 require 'spec_helper'
-
-def app
-  Devcasts::App
-end
 
 describe "Show Video Page" do
   let!(:user) { create(:user, name: 'JF') }
   let!(:video) { create(:video) }
-
-  include Rack::Test::Methods
 
   def url
     "/videos/#{video.id}"
