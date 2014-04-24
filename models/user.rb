@@ -20,10 +20,9 @@ module Devcasts
         user
       end
 
-      def id
-        self["_id"]
+      def name
+        self.attributes["name"].nil? ? self.nickname : self.attributes["name"]
       end
-
       def videos
         self.purchases.map(&:video)
       end

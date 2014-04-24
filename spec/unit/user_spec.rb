@@ -22,6 +22,18 @@ describe User do
     end
   end
 
+  describe "#name" do
+    it "returns the name if it exists" do
+      user = create(:user, name: 'jf')
+      expect(user.name).to eq('jf')
+    end
+
+    it "returns the nickname if there is no name" do
+      user = create(:user, name: nil, nickname: 'jf')
+      expect(user.name).to eq('jf')
+    end
+  end
+
   describe "#id" do
     it "returns the Mongo _id" do
       user = create(:user, email: 'test')
