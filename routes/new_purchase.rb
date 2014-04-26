@@ -3,9 +3,9 @@ require 'json'
 module Devcasts
   module Routes
     class NewPurchase < Base
-      error Stripe::CardError do
-        'there was a card error'
-      end
+      # error Stripe::CardError do
+      #   'there was a card error'
+      # end
 
       get '/purchase/:video_id' do
         unless signed_in?
@@ -23,27 +23,13 @@ module Devcasts
       end
 
       post '/purchase/:video_id' do
-        video = Video.find(params[:video_id])
-        customer = Stripe::Customer.create(
-          :email => params[:stripeEmail],
-          :card  => params[:stripeToken]
-        )
-
-        charge = Stripe::Charge.create(
-          :customer    => customer.id,
-          :amount      => 300,
-          :description => "Purchase of '#{video.title} from Devcast.in'",
-          :currency    => 'gbp'
-        )
-
-        if charge.paid
-          purchase = Purchase.new(user: current_user, video: video)
-          purchase.charge_id = charge.id
-          purchase.save
-
-          send_purchase_email(video)
-
-          redirect "/purchase/confirmed/#{video.id}"
+        params[:user_id] = session[:user_id]
+        purchase = VideoPurchase.new(params).create
+        if purchase
+          send_purchase_email(purchase.video)
+          redirect "/purchase/confirmed/#{purchase.video.id}"
+        else
+          'got wrong'
         end
       end
 
