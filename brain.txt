@@ -1,0 +1,44 @@
+# purchase block of X credits
+# use a credit to buy a video
+
+# 5 credits = £10 (2)
+# 10 credits = £15 (1.5)
+# 20 credits = £25 (1.25)
+
+# add it to the user class
+
+User < Mongoid
+  => has_many credit_purchases
+  => credits_remaining: purchased_credits_amount - spent_credits_amount
+  => purchased_credits_amount: user.credit_purchases.map(&:credit_amount).sum
+  => spent_credits_amount: user.credit_video_purchases.map(&:credit_amount).sum
+  => videos: user.credit_video_purchases.map(&:video)
+
+CreditPurchase < Mongoid
+  => belongs_to user
+  => stripe_charge_id
+  => credit_amount
+
+CreditVideoPurchase < Mongoid
+  => belongs_to user
+  => belongs_to video
+  => credit_amount
+
+AddCreditPayment
+  => new(amount, user)
+  => create_stripe_customer
+  => create_stripe_charge
+  => create_credit_purchase
+      CreditPurchase.new(user, stripe_charge_id, amount)
+  => send_purchase_email
+
+VideoPurchase
+  => new(video, user, amount)
+  => purchase
+    CreditVideoPurchase.new(user, video, amount)
+  => send_purchase_email
+
+
+
+
+
