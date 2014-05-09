@@ -7,6 +7,8 @@
 
 # add it to the user class
 
+# user becoming a bit god like? A CreditUser class maybe?
+# All it would be is a set of relations though and those below methods. Feels a bit OTT.
 User < Mongoid
   => has_many credit_purchases
   => credits_remaining: purchased_credits_amount - spent_credits_amount

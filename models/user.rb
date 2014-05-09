@@ -1,5 +1,4 @@
 require_relative "base_model"
-require_relative "purchase"
 
 module Devcasts
   module Models
@@ -10,7 +9,9 @@ module Devcasts
 
       validates :nickname, uniqueness: true
 
-      has_many :purchases
+      has_many :credit_purchases
+      has_many :credit_video_purchases
+
 
       def self.create_or_get_from_omniauth(opts)
         user = self.where(email: opts[:email]).first
@@ -25,14 +26,24 @@ module Devcasts
       end
 
       def videos
-        self.purchases.map(&:video)
+        self.credit_video_purchases.map(&:video)
       end
 
       def has_video?(video)
-        video.free? || self.purchases.any? do |purchase|
-          purchase.video == video
-        end
+        video.free? || self.videos.any? { |v| video == v }
       end
+
+      def credits_remaining
+        credit_amounts = self.credit_purchases.map(&:credit_amount)
+        total_credits = credit_amounts.reduce { |x, y| x + y } || 0
+        spent_amounts = self.credit_video_purchases.map(&:credit_amount)
+        total_spent = spent_amounts.reduce { |x, y| x + y } || 0
+        total_credits - total_spent
+      end
+  #credits_remaining: purchased_credits_amount - spent_credits_amount
+  #purchased_credits_amount: user.credit_purchases.map(&:credit_amount).sum
+  #spent_credits_amount: user.credit_video_purchases.map(&:credit_amount).sum
+  #videos: user.credit_video_purchases.map(&:video)
 
     end
   end

@@ -3,9 +3,10 @@ module Devcasts
     autoload :BaseModel, 'models/base_model'
     autoload :User, 'models/user'
     autoload :Video, 'models/video'
-    autoload :Purchase, 'models/purchase'
     autoload :GuestUser, 'models/guest_user'
     autoload :EarlyAccess, 'models/early_access'
-    autoload :VideoPurchase, 'models/video_purchase'
+    autoload :CreditPurchase, 'models/credit_purchase'
+    autoload :CreditVideoPurchase, 'models/credit_video_purchase'
+    autoload :AddCreditPayment, 'models/add_credit_payment'
   end
 end

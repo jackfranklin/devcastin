@@ -1,9 +1,8 @@
-require_relative 'purchase'
 module Devcasts
   module Models
     class Video < BaseModel
 
-      has_many :purchases
+      has_many :credit_video_purchases
 
       validates :title, uniqueness: true
 
@@ -15,10 +14,6 @@ module Devcasts
       field :published, type: Boolean, default: false
 
       default_scope where(published: true)
-
-      def id
-        self["_id"]
-      end
 
       def free?
         self.is_free
