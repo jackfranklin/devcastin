@@ -14,6 +14,16 @@ describe AddCreditPayment do
 
   let(:user) { build(:user) }
   describe "creating a new payment" do
+    it "does not add credit if payment fails" do
+      Stripe::Charge.stubs(:create).returns(Struct.new(:paid, :id).new(false, 4567))
+      stub_customer
+      AddCreditPayment.new(
+        user: user,
+        amount: 10
+      ).process
+      expect(user.credits_remaining).to eq(0)
+    end
+
     it "creates a stripe customer" do
       Stripe::Customer.expects(:create).returns(Struct.new(:id).new(1234))
       stub_charge_success
