@@ -34,10 +34,11 @@ module Devcasts
       end
 
       def credits_remaining
+        sum = Proc.new { |x, y| x + y }
         credit_amounts = self.credit_purchases.map(&:credit_amount)
-        total_credits = credit_amounts.reduce { |x, y| x + y } || 0
+        total_credits = credit_amounts.reduce(&sum) || 0
         spent_amounts = self.credit_video_purchases.map(&:credit_amount)
-        total_spent = spent_amounts.reduce { |x, y| x + y } || 0
+        total_spent = spent_amounts.reduce(&sum) || 0
         total_credits - total_spent
       end
   #credits_remaining: purchased_credits_amount - spent_credits_amount

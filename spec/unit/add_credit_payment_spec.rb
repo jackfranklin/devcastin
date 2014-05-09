@@ -14,12 +14,34 @@ describe AddCreditPayment do
 
   let(:user) { build(:user) }
   describe "creating a new payment" do
+    it "creates a stripe customer" do
+      Stripe::Customer.expects(:create).returns(Struct.new(:id).new(1234))
+      stub_charge_success
+      AddCreditPayment.new(
+        user: user,
+        amount: 10
+      ).process
+    end
+
+    it "creates a stripe charge" do
+      Stripe::Charge.expects(:create).returns(Struct.new(:paid, :id).new(true, 4567))
+      stub_customer
+      AddCreditPayment.new(
+        user: user,
+        amount: 10
+      ).process
+    end
+
     it "adds the user's credit" do
       stub_charge_success
       stub_customer
 
-      AddCreditPayment.new(user, 10).process
-      expect(user.credits).to eq(10)
+      AddCreditPayment.new(
+        user: user,
+        amount: 10
+      ).process
+
+      expect(user.credits_remaining).to eq(10)
     end
 
   end
