@@ -20,11 +20,13 @@ module Devcasts
 
       def create_purchase_if_success
         if @charge.paid
-          CreditPurchase.create(
+          Struct.new(:charge, :success?).new(CreditPurchase.create(
             stripe_charge_id: 1234,
             credit_amount: amount,
             user: user
-          )
+          ), true)
+        else
+          Struct.new(:charge, :success?).new(nil, false)
         end
 
       end
