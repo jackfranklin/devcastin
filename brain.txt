@@ -34,7 +34,7 @@ AddCreditPayment
       CreditPurchase.new(user, stripe_charge_id, amount)
   => send_purchase_email
 
-VideoPurchase
+AddVideoPayment
   => new(video, user, amount)
   => purchase
     CreditVideoPurchase.new(user, video, amount)
