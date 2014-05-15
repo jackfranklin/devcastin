@@ -1,3 +1,4 @@
+require 'stripe'
 # todo: this should have an emailer in
 module Devcasts
   module Models
@@ -20,8 +21,8 @@ module Devcasts
       def create_purchase_if_success
         if @charge.paid
           Struct.new(:charge, :success?).new(CreditPurchase.create(
-            stripe_charge_id: 1234,
-            credit_amount: amount,
+            stripe_charge_id: @charge.id,
+            credit_amount: @amount,
             user: user
           ), true)
         else
@@ -31,12 +32,17 @@ module Devcasts
       end
 
       def create_charge
-        Stripe::Charge.create(
-          :customer    => @customer.id,
-          :amount      => 10,
-          :description => "Credits for Devcast.in",
-          :currency    => 'gbp'
-        )
+        #todo improve the error handling here
+        begin
+          Stripe::Charge.create(
+            :customer    => @customer.id,
+            :amount      => 750,
+            :description => "Credits for Devcast.in",
+            :currency    => 'gbp'
+          )
+        rescue Exception => e
+          p e
+        end
       end
 
 
@@ -49,6 +55,7 @@ module Devcasts
           card: @params[:stripeToken]
         )
         @user.stripe_customer_id = customer.id
+        @user.save
         customer
         end
       end

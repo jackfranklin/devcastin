@@ -6,6 +6,7 @@ module Devcasts
           redirect "/"
         end
 
+        @user = current_user
         erb :user_profile
       end
     end
