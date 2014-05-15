@@ -47,19 +47,12 @@ module Devcasts
 
 
       def create_customer
-        if @user.stripe_customer_id
-          Stripe::Customer.retrieve(@user.stripe_customer_id)
-        else
-        customer = Stripe::Customer.create(
-          email: @params[:stripeEmail],
-          card: @params[:stripeToken]
+        PaymentGateway.create_or_get_customer_for_user(
+          user: @user,
+          stripe_email: @params[:stripeEmail],
+          stripe_token: @params[:stripeToken]
         )
-        @user.stripe_customer_id = customer.id
-        @user.save
-        customer
-        end
       end
-
     end
   end
 end

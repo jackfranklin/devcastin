@@ -8,5 +8,6 @@ module Devcasts
     autoload :CreditPurchase, 'models/credit_purchase'
     autoload :CreditVideoPurchase, 'models/credit_video_purchase'
     autoload :AddCreditPayment, 'models/add_credit_payment'
+    autoload :PaymentGateway, 'models/payment_gateway'
   end
 end
