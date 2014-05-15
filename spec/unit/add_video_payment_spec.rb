@@ -5,8 +5,8 @@ include Devcasts::Models
 
 describe AddVideoPayment do
 
-  let(:user) { build(:user) }
-  let(:video) { build(:video) }
+  let(:user) { create(:user) }
+  let(:video) { create(:video) }
   let(:add_video_payment) do
     AddVideoPayment.new(user: user, video: video, credit_amount: 1)
   end
@@ -34,11 +34,42 @@ describe AddVideoPayment do
   end
 
   describe "#process" do
-    it "invokes #purchass on the CreditVideoPurchase" do
-      stub_charge_success
-      stub_customer
-      CreditVideoPurchase.any_instance.expects(:process)
-      add_video_payment.process
+    context "user with credits" do
+      let!(:credit_purchase) { create(:credit_purchase, credit_amount: 5, user: user) }
+      let(:add_video_payment) { AddVideoPayment.new(user: user, video: video, credit_amount: 1) }
+
+      before(:each) { add_video_payment.process }
+
+      it "lets them buy the video" do
+        expect(add_video_payment.success?).to be_true
+      end
+
+      it "saves the purchase with the correct associations" do
+        expect(CreditVideoPurchase.last.video).to eq(video)
+        expect(CreditVideoPurchase.last.user).to eq(user)
+      end
+
+      it "decrements the number of credits a user has" do
+        expect(user.credits_remaining).to eq(4)
+      end
+
+      it "sends an email with the user's purchase" do
+        Devcasts::Mailer.expects(:new).with do |*args|
+          args[0] == user.email && args[2].include?(video.title)
+        end.returns(Struct.new(:send).new(1))
+        add_video_payment.process
+      end
     end
+
+    context "user without credits" do
+      let(:add_video_payment) { AddVideoPayment.new(user: user, video: video, credit_amount: 1) }
+
+      before(:each) { add_video_payment.process }
+
+      it "does not let the user buy the video" do
+        expect(add_video_payment.success?).to be_false
+      end
+    end
+
   end
 end

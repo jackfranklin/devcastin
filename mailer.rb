@@ -17,7 +17,6 @@ module Devcasts
       @dest = dest
       @subject_text = subject_text
       @content = content
-
     end
 
     def send
