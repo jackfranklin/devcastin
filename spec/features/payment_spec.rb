@@ -6,6 +6,7 @@ describe "Buying some credits", :type => :feature do
   let!(:video) { create(:video, title: 'Test Video') }
 
   before(:each) do
+    User.any_instance.stubs(:stripe_customer_id).returns("cus_42bqWQ3tG2v2aW")
     visit "/"
     click_link "Log In / Sign Up"
   end
