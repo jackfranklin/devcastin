@@ -6,6 +6,7 @@ module Devcasts
       field :nickname, type: String
       field :name, type: String
       field :email, type: String
+      field :stripe_customer_id, type: String
 
       validates :nickname, uniqueness: true
 

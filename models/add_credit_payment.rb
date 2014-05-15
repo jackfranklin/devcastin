@@ -41,10 +41,16 @@ module Devcasts
 
 
       def create_customer
-        Stripe::Customer.create(
+        if @user.stripe_customer_id
+          Stripe::Customer.retrieve(@user.stripe_customer_id)
+        else
+        customer = Stripe::Customer.create(
           email: @params[:stripeEmail],
           card: @params[:stripeToken]
         )
+        @user.stripe_customer_id = customer.id
+        customer
+        end
       end
 
     end

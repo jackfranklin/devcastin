@@ -79,5 +79,24 @@ describe AddCreditPayment do
       amount: 10
     ).process
   end
+
+  it "adds stripe_customer_id to the user" do
+    stub_charge_success
+    stub_customer
+    AddCreditPayment.new(
+      user: user,
+      amount: 10
+    ).process
+    expect(user.stripe_customer_id).to eq("1234")
+  end
+
+  it "calls the stripe API if a ID already exists" do
+    Stripe::Customer.expects(:retrieve).
+      with("1234").returns(Struct.new(:id).new("1234"))
+    stub_charge_success
+    stub_customer
+    user.stripe_customer_id = "1234"
+    AddCreditPayment.new(user: user, amount: 10).process
+  end
 end
 
