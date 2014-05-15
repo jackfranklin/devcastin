@@ -55,10 +55,11 @@ module Devcasts
     use Routes::NewPurchase
     use Routes::ShowVideo
     use Routes::UserProfile
-    use Routes::Admin
     use Routes::Archive
     use Routes::About
     use Routes::Search
+    use Routes::PurchaseCredits
+    use Routes::Admin
 
   end
 end
