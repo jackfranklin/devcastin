@@ -18,8 +18,9 @@ describe Video do
     it "finds the purchase for the current user" do
       user = build(:user)
       video = build(:video)
-      purchase = build(:purchase, video: video, user: user)
-      expect(video.purchase_for_user(user)).to eq(purchase)
+      credit_purchase = build(:credit_purchase, credit_amount: 5, user: user)
+      video_purchase = build(:credit_video_purchase, user: user, video: video)
+      expect(video.purchase_for_user(user)).to eq(video_purchase)
     end
   end
 end

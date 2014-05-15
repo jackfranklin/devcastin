@@ -20,7 +20,7 @@ module Devcasts
       end
 
       def purchase_for_user(user)
-        self.purchases.select { |p| p.user == user }.first
+        self.credit_video_purchases.select { |p| p.user = user }.first
       end
 
       def hour_s3_url
