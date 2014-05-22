@@ -13,6 +13,10 @@ module Devcasts
         video.free?
       end
 
+      def credits_remaining
+        0
+      end
+
       def videos
         []
       end

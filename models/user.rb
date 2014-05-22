@@ -13,7 +13,6 @@ module Devcasts
       has_many :credit_purchases
       has_many :credit_video_purchases
 
-
       def self.create_or_get_from_omniauth(opts)
         user = self.where(email: opts[:email]).first
         unless user
@@ -42,11 +41,6 @@ module Devcasts
         total_spent = spent_amounts.reduce(&sum) || 0
         total_credits - total_spent
       end
-  #credits_remaining: purchased_credits_amount - spent_credits_amount
-  #purchased_credits_amount: user.credit_purchases.map(&:credit_amount).sum
-  #spent_credits_amount: user.credit_video_purchases.map(&:credit_amount).sum
-  #videos: user.credit_video_purchases.map(&:video)
-
     end
   end
 end

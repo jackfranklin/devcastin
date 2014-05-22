@@ -21,7 +21,7 @@
       <% if current_user.has_video?(@latest_videos[0]) %>
         <a href="/videos/<%= @latest_videos[0].id %>" class="button large">Watch Now</a>
       <% else %>
-        <a class="button large" href="/purchase/<%= @latest_videos[0].id %>">Purchase (&pound;3)</a>
+        <a class="button large" href="/purchase/<%= @latest_videos[0].id %>">Purchase (1 credit)</a>
       <% end %>
     </div>
     <div class="older-videos">
@@ -37,7 +37,7 @@
             <% if current_user.has_video?(video) %>
               <a href="/videos/<%= video.id %>" class="button small">Watch Now</a>
             <% else %>
-              <a class="button small" href="/purchase/<%= video.id %>">Purchase (&pound;3)</a>
+              <a class="button small" href="/purchase/<%= video.id %>">Purchase (1 credit)</a>
             <% end %>
           </li>
         <% end %>
