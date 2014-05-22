@@ -24,7 +24,7 @@ describe "Show Video Page" do
     end
 
     it "shows the purchase link" do
-      expect(last_response.body).to include('Purchase (&pound;3)')
+      expect(last_response.body).to include('Purchase (1 credit)')
     end
   end
 
