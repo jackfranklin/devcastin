@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Purchasing Credits</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <% if signed_in? %>
+      <p>Click the link below to have your payment processed via Stripe.</p>
+      <p>Once purchased the credits will be added to your account and you will be emailed a download link.</p>
+      <form action="/purchase_credits" method="post">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= ENV["STRIPE_TEST_PUBLISH"] %>"
+          data-description="Purchase of 5 credits from Devcast.in"
+        data-amount="750" data-currency="gbp"></script>
+      </form>
+    <% else %>
+      <p>You need to sign in to buy credits</p>
+    <% end %>
+  </div>
+</div>

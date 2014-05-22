@@ -16,15 +16,15 @@
       <p>The download URL is valid for one hour. If it expires, refresh the page to get a new URL.</p>
     <% else %>
       <div class="purchase-video">
-        <a class="button large" href="/purchase/<%= @video.id %>">Purchase (&pound;3)</a>
+        <a class="button large" href="/purchase/<%= @video.id %>">Purchase (1 credit)</a>
       </div>
     <% end %>
 
     <h4>Description</h4>
     <p><%= @video.description %></p>
   </div>
-  <div class="large-3 large-offset-1 columns">
 
+  <div class="large-3 large-offset-1 columns">
     <h4>Topics covered in this video.</h4>
     <ul>
       <% @video.topics.each do |t| %>
@@ -40,9 +40,9 @@
     <% if current_user.has_video?(@video) && !@video.free? %>
       <p>You purchased this video on <%= @video.purchase_for_user(current_user).created_at.stamp('1st of January, 2014 at 5:15pm') %>. Thank you for your support of Devcast.in.</p>
     <% end %>
-
   </div>
 </div>
+
 <script src="/js/jquery.js"></script>
 <script src="/js/video_player.js"></script>
 

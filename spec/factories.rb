@@ -1,8 +1,9 @@
 require 'factory_girl'
 require_relative '../models/user'
-require_relative '../models/purchase'
 require_relative '../models/video'
 require_relative "../models/guest_user"
+require_relative "../models/credit_purchase"
+require_relative "../models/credit_video_purchase"
 
 FactoryGirl.define do
   factory :user, class: Devcasts::Models::User do
@@ -11,10 +12,12 @@ FactoryGirl.define do
     email 'test@test.com'
   end
 
-  factory :purchase, class: Devcasts::Models::Purchase do
-    sequence :charge_id do |n|
-      "12#{n}#{n}ABC"
-    end
+  factory :credit_purchase, class: Devcasts::Models::CreditPurchase do
+    sequence(:stripe_charge_id) { |n| "1234#{n}" }
+    credit_amount 1
+  end
+
+  factory :credit_video_purchase, class: Devcasts::Models::CreditVideoPurchase do
   end
 
   factory :video, class: Devcasts::Models::Video do

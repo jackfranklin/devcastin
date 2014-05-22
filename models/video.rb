@@ -1,9 +1,8 @@
-require_relative 'purchase'
 module Devcasts
   module Models
     class Video < BaseModel
 
-      has_many :purchases
+      has_many :credit_video_purchases
 
       validates :title, uniqueness: true
 
@@ -16,16 +15,21 @@ module Devcasts
 
       default_scope where(published: true)
 
-      def id
-        self["_id"]
-      end
-
       def free?
         self.is_free
       end
 
       def purchase_for_user(user)
-        self.purchases.select { |p| p.user == user }.first
+        self.credit_video_purchases.select { |p| p.user = user }.first
+      end
+
+      def hour_s3_url
+        s3 = AWS::S3.new
+        s3_filename = Pathname.new(s3_url).split.last.to_s
+
+        bucket = s3.buckets['jf-devcasts']
+        vid = bucket.objects[s3_filename]
+        vid.url_for(:read, :expires => 60).to_s
       end
 
     end

@@ -1,0 +1,10 @@
+{
+  "models/*.rb": {
+    "alternate": "spec/unit/{}_spec.rb",
+    "type": "source"
+  },
+  "spec/unit/*_spec.rb": {
+    "alternate": "models/{}.rb",
+    "type": "test"
+  }
+}

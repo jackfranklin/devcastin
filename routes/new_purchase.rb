@@ -18,41 +18,30 @@ module Devcasts
           redirect "/videos/#{@video.id}"
         end
 
-
         erb :new_purchase
       end
 
       post '/purchase/:video_id' do
-        params[:user_id] = session[:user_id]
-        purchase = VideoPurchase.new(params).create
-        if purchase
-          send_purchase_email(purchase.video)
-          redirect "/purchase/confirmed/#{purchase.video.id}"
+        purchase = AddVideoPayment.new(
+          video: Video.find(params[:video_id]),
+          user: current_user,
+          credit_amount: 1
+        )
+
+        purchase.process
+
+        if purchase.success?
+          redirect "/purchase/confirmed/#{params[:video_id]}"
         else
-          'got wrong'
+          # todo this
+          ' went wrong '
         end
       end
 
       get '/purchase/confirmed/:video_id' do
         @video = Video.find(params[:video_id])
-        @s3_url = get_hour_s3_url(@video)
+        @s3_url = @video.hour_s3_url
         erb :confirmed_purchase
-      end
-
-      private
-
-      def send_purchase_email(video)
-        s3_url = get_hour_s3_url(video)
-        content = <<EML
-<p>Dear #{current_user.name},</p>
-<p>You have succesfully purchased "#{video.title}". You can download the video at the following URL:</p>
-<p>#{s3_url}</p>
-<p>The above URL will expire after one hour of this email being sent. You can always get a new URL and stream the video at: http://devcast.in/videos/#{video.id}.</p>
-<p>If you have any questions or problems please reply to this email.</p>
-<p>Thank you for your support,</p>
-<p>Jack Franklin.</p>
-EML
-      Devcasts::Mailer.new(current_user.email, 'Purchase from Devcast.in', content).send
       end
     end
   end

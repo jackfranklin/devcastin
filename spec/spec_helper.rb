@@ -41,15 +41,43 @@ RSpec.configure do |config|
     DatabaseCleaner[:mongoid].clean_with(:truncation)
   end
 
-  config.before(:all) do
-    Devcasts::Mailer.any_instance.stubs(:send)
-  end
-
   config.before(:each) do
     DatabaseCleaner.start
+    Devcasts::Mailer.any_instance.stubs(:send)
+    AWS::S3.stubs(:new).returns(AWSStub.new)
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+end
+
+class AWSStub
+  def buckets
+    AWSBucketsStub.new
+  end
+end
+
+class AWSBucketsStub
+  def [](*args)
+    AWSBucketStub.new
+  end
+end
+
+class AWSBucketStub
+  def objects
+    AWSObjectStub.new
+  end
+end
+
+class AWSObjectStub
+  def [](*args)
+    AWSVideoStub.new
+  end
+end
+
+class AWSVideoStub
+  def url_for(*args)
+    'http://video.s3.com'
   end
 end

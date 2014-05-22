@@ -31,6 +31,7 @@ module Devcasts
       set :views, 'views'
       set :root, File.expand_path('../../', __FILE__)
 
+      # todo: remove this, method is on the video now
       def get_hour_s3_url(video)
         s3 = AWS::S3.new
         s3_filename = Pathname.new(video.s3_url).split.last.to_s

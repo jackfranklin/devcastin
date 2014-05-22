@@ -34,34 +34,21 @@ describe User do
     end
   end
 
-  describe "#id" do
-    it "returns the Mongo _id" do
-      user = create(:user, email: 'test')
-      id = user["_id"]
-
-      expect(user.id).to equal(id)
-    end
-  end
-
   describe "#videos" do
     it "returns a list of videos the user has purchased" do
       user = build(:user)
-      purchase1 = build(:purchase, user: user)
-      purchase2 = build(:purchase, user: user)
-      videos = [build(:video, purchases: [purchase1]),
-                build(:video, purchases: [purchase2])]
+      video = build(:video)
+      video_purchase = build(:credit_video_purchase, user: user, video: video)
 
-      user_videos = user.videos
-      expect(user_videos[0]).to eq(videos[0])
-      expect(user_videos[1]).to eq(videos[1])
+      expect(user.videos).to include(video)
     end
   end
 
   describe "#has_video?" do
     it "is true if the user has purchased the video" do
       user = build(:user)
-      purchase = build(:purchase, user: user)
-      video = build(:video, purchases: [purchase])
+      video = build(:video)
+      video_purchase = build(:credit_video_purchase, user: user, video: video)
       expect(user.has_video?(video)).to be_true
     end
 
@@ -69,15 +56,34 @@ describe User do
       user = build(:user)
       video = build(:video, is_free: true)
       expect(user.has_video?(video)).to be_true
-
     end
 
     it "is false if the user has not purchased the video" do
       user = build(:user)
-      user2 = build(:user)
-      purchase = build(:purchase, user: user2)
-      video = build(:video, purchases: [purchase])
+      video = build(:video)
       expect(user.has_video?(video)).to be_false
+    end
+  end
+
+  describe "#credits_remaining" do
+    it "is 0 if there are no purchases" do
+      user = build(:user)
+      expect(user.credits_remaining).to eq(0)
+    end
+
+    it "shows the amount purchased if there are no video purchases" do
+      user = build(:user)
+      credit_purchase = build(:credit_purchase, credit_amount: 5, user: user)
+      expect(user.credits_remaining).to eq(5)
+    end
+
+    it "takes into account video purchases" do
+      user = build(:user)
+      credit_purchase = build(:credit_purchase, credit_amount: 5, user: user)
+      video_purchase = build(:credit_video_purchase,
+                             user: user, video: build(:video))
+      expect(user.credits_remaining).to eq(4)
+
     end
   end
 end
