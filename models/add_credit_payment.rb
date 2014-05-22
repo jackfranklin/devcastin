@@ -14,6 +14,10 @@ module Devcasts
         @customer = create_customer
         @charge = create_charge
         @purchase = create_purchase_if_success
+        if @purchase.success?
+          email_customer
+        end
+        @purchase
       end
 
       private
@@ -52,6 +56,18 @@ module Devcasts
           stripe_email: @params[:stripeEmail],
           stripe_token: @params[:stripeToken]
         )
+      end
+
+      def email_customer
+        content = <<EML
+<p>Dear #{@user.name},</p>
+<p>You have succesfully purchased 5 credits for Devcastin.</p>
+<p>These can be used to purchase any videos on the site.</p>
+<p>If you have any questions or problems please reply to this email.</p>
+<p>Thank you for your support,</p>
+<p>Jack Franklin.</p>
+EML
+        Devcasts::Mailer.new(@user.email, 'Credit Purchase from Devcast.in', content).send
       end
     end
   end

@@ -51,6 +51,15 @@ describe AddCreditPayment do
       expect(user.credits_remaining).to eq(10)
     end
 
+    it "emails the customer" do
+      Devcasts::Mailer.expects(:new).with do |*args|
+        args[0] == user.email && args[1].include?('Credit Purchase')
+      end.returns(Struct.new(:send).new(1))
+      stub_charge_success
+      stub_customer
+      AddCreditPayment.new(user: user, amount: 5).process
+    end
+
     it "returns a struct with the charge information" do
       stub_charge_success
       stub_customer

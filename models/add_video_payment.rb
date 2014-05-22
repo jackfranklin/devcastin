@@ -28,11 +28,6 @@ module Devcasts
       end
 
       def process
-        # make sure user has credit
-        # create purchase
-        # subtract one credit
-        # send an email
-
         if @user.credits_remaining > 0
           @success = purchase.save
           content = <<EML
