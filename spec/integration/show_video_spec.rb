@@ -28,4 +28,11 @@ describe "Show Video Page" do
     end
   end
 
+  context "logged in and purchased", :type => :feature do
+    let!(:purchase) { create(:credit_video_purchase, video: video, user: user) }
+    it "shows the video S3 URL" do
+      get url, {}, { 'rack.session' => { user_id: user.id } }
+      expect(last_response.body).to include(video.hour_s3_url)
+    end
+  end
 end

@@ -31,7 +31,6 @@ module Devcasts
         vid = bucket.objects[s3_filename]
         vid.url_for(:read, :expires => 60).to_s
       end
-
     end
   end
 end

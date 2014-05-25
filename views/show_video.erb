@@ -8,11 +8,11 @@
       <div class="video-player">
         <video id="my_video_1" class="video-js vjs-default-skin" controls
           preload="auto" width="640" height="264" data-setup="{}">
-          <source src="<%= @s3_url %>" type='video/mp4'>
+          <source src="<%= @video.hour_s3_url %>" type='video/mp4'>
         </video>
         <p>It is recommended that you view the video full screen for the best results.</p>
       </div>
-      <a class="button" href="<%= @s3_url %>">Download (MP4)</a>
+      <a class="button" href="<%= @video.hour_s3_url %>">Download (MP4)</a>
       <p>The download URL is valid for one hour. If it expires, refresh the page to get a new URL.</p>
     <% else %>
       <div class="purchase-video">
