@@ -1,4 +1,4 @@
-%w{user purchase video}.each do |f|
+%w{user video credit_purchase credit_video_purchase}.each do |f|
   require_relative "models/#{f}.rb"
 end
 
@@ -7,7 +7,6 @@ include Devcasts::Models
 
 User.collection.drop
 Video.collection.drop
-Purchase.collection.drop
 
 user = User.create_or_get_from_omniauth(
   nickname: 'jackfranklin',
@@ -59,17 +58,5 @@ Video.new(
   topics: ['Designing Applications', 'Sinatra Apps'],
   published: true
 ).save
-
-purchase1 = Purchase.new(charge_id: 1234)
-purchase1.video = video1
-
-purchase2 = Purchase.new(charge_id: 4567)
-purchase2.video = video3
-
-user.purchases << purchase1
-user.purchases << purchase2
-
-purchase1.save!
-purchase2.save!
 
 user.save!
