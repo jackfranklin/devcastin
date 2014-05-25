@@ -21,9 +21,11 @@ gem 'mail'
 
 gem 'thin'
 
+
 group :development do
   gem 'shotgun'
   gem 'pry'
+  gem 'rake'
 end
 
 group :test do
