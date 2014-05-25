@@ -7,12 +7,15 @@ include Devcasts::Models
 
 User.collection.drop
 Video.collection.drop
+CreditPurchase.collection.drop
+CreditVideoPurchase.collection.drop
 
 user = User.create_or_get_from_omniauth(
   nickname: 'jackfranklin',
   name: 'Jack Franklin',
   email: 'jack@jackfranklin.net'
 )
+
 
 video1 = Video.new(
   title: 'Introduction to ES6',
@@ -22,25 +25,25 @@ video1 = Video.new(
   published: true
 )
 
-video1.save
+video1.save!
 
-Video.new(
+Video.create!(
   title: 'Testing Angular',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
   topics: ['AngularJS', 'Testing', 'Karma'],
   published: true
-).save
+)
 
-Video.new(
+Video.create!(
   title: 'Mocking in Ruby with Mocha',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
   topics: ['Testing Ruby', 'Test Mocks', 'Mocha Gem'],
   published: true
-).save
+)
 
-video3 = Video.new(
+Video.create!(
   title: 'Syntastic and Vim',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
@@ -49,14 +52,15 @@ video3 = Video.new(
   published: true
 
 )
-video3.save
 
-Video.new(
+Video.create!(
   title: 'Structuring Sinatra Apps',
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
   topics: ['Designing Applications', 'Sinatra Apps'],
   published: true
-).save
+)
 
+CreditPurchase.create!(user: user, credit_amount: 5, stripe_charge_id: "1234ABC")
+CreditVideoPurchase.create!(user: user, video: video1)
 user.save!
