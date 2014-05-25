@@ -7,16 +7,12 @@ describe "Purchasing", :type => :feature do
 
   before(:each) do
     User.any_instance.stubs(:stripe_customer_id).returns("cus_42bqWQ3tG2v2aW")
-    visit "/"
-    click_link "Log In / Sign Up"
   end
-
-  after(:each) do
-    click_link 'Logout'
-  end
-
 
   describe "buying some credits", :js => true do
+    before(:each) { sign_in }
+    after(:each) { sign_out }
+
     it "adds credits to the user" do
       buy_some_credits
       expect(page).to have_content 'Payment went through!'
@@ -26,6 +22,9 @@ describe "Purchasing", :type => :feature do
   end
 
   describe "buying a video", :js => true do
+    before(:each) { sign_in }
+    after(:each) { sign_out }
+
     it "lets the user buy the video with a credit" do
       visit "/"
       buy_some_credits
@@ -38,18 +37,4 @@ describe "Purchasing", :type => :feature do
       expect(User.last.videos).to include(video)
     end
   end
-
-  def buy_some_credits
-    click_link "Purchase Credits"
-    click_on "Pay with Card"
-    within_frame 'stripe_checkout_app' do
-      fill_in("email", :with => "jack@jackfranklin.net")
-      fill_in("card_number", :with => "4242 4242 4242 4242")
-      fill_in("cc-exp", :with => "03/15")
-      fill_in("cc-csc", :with => "111")
-      click_on("Pay £7.50")
-    end
-    sleep 2
-  end
-
 end

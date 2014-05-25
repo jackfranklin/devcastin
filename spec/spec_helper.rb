@@ -6,6 +6,7 @@ require 'omniauth'
 
 require_relative 'factories'
 require_relative '../app'
+require_relative './support/feature_support'
 
 module Devcasts
 end
@@ -33,6 +34,7 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.include FactoryGirl::Syntax::Methods
   config.include Devcasts::Models
+  config.include Features::FeatureHelpers, type: :feature
   config.mock_with :mocha
   config.before(:suite) do
     Mongoid.load!("mongoid.yml", :test)
