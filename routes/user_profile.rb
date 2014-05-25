@@ -7,6 +7,7 @@ module Devcasts
         end
 
         @user = current_user
+        @videos = @user.videos
         erb :user_profile
       end
     end

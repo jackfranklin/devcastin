@@ -1,2 +1,6 @@
 User profile<br>
-<%= @user.credits_remaining %>
+<%= @user.credits_remaining %> <%= @user.credits_remaining == 1 ? "credit" : "credits" %> remaining
+
+<% @videos.each do |video| %>
+  <%= video.title %>
+<% end %>
