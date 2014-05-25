@@ -17,6 +17,15 @@ def app
   Devcasts::App
 end
 
+module Rack
+  class CommonLogger
+    def call(env)
+      # do nothing
+      @app.call(env)
+    end
+  end
+end
+
 Capybara.app = app
 
 OmniAuth.config.test_mode = true
