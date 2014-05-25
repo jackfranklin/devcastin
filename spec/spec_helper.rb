@@ -7,6 +7,8 @@ require 'omniauth'
 require_relative 'factories'
 require_relative '../app'
 require_relative './support/feature_support'
+require_relative './support/aws_stubs'
+
 
 module Devcasts
 end
@@ -63,32 +65,3 @@ RSpec.configure do |config|
   end
 end
 
-class AWSStub
-  def buckets
-    AWSBucketsStub.new
-  end
-end
-
-class AWSBucketsStub
-  def [](*args)
-    AWSBucketStub.new
-  end
-end
-
-class AWSBucketStub
-  def objects
-    AWSObjectStub.new
-  end
-end
-
-class AWSObjectStub
-  def [](*args)
-    AWSVideoStub.new
-  end
-end
-
-class AWSVideoStub
-  def url_for(*args)
-    'http://video.s3.com'
-  end
-end
