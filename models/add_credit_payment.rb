@@ -1,5 +1,4 @@
 require 'stripe'
-# todo: this should have an emailer in
 module Devcasts
   module Models
     class AddCreditPayment
