@@ -4,6 +4,14 @@ require_relative "../../models/video"
 include Devcasts::Models
 
 describe Video do
+  describe "#tags" do
+    it "has many tags" do
+      tag1 = create(:tag)
+      video = create(:video, tags: [tag1])
+      expect(video.tags).to eq [tag1]
+    end
+  end
+
   describe "#free?" do
     it "is true if is_free is true" do
       expect(build(:video, is_free: true).free?).to be_true
@@ -18,7 +26,6 @@ describe Video do
     it "finds the purchase for the current user" do
       user = build(:user)
       video = build(:video)
-      credit_purchase = build(:credit_purchase, credit_amount: 5, user: user)
       video_purchase = build(:credit_video_purchase, user: user, video: video)
       expect(video.purchase_for_user(user)).to eq(video_purchase)
     end

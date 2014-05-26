@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe "Show Video Page" do
   let!(:user) { create(:user, name: 'JF') }
-  let!(:video) { create(:video) }
+  let(:tag1) { create(:tag) }
+  let(:tag2) { create(:tag) }
+  let!(:video) { create(:video, tags: [tag1, tag2]) }
 
   def url
     "/videos/#{video.id}"
@@ -11,6 +13,12 @@ describe "Show Video Page" do
   it "shows the title" do
     get url
     expect(last_response.body).to include(video.title)
+  end
+
+  it "shows the video tags" do
+    get url
+    expect(last_response.body).to include(tag1.title)
+    expect(last_response.body).to include(tag2.title)
   end
 
   context "logged in but not purchased" do

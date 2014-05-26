@@ -3,6 +3,7 @@ module Devcasts
     autoload :BaseModel, 'models/base_model'
     autoload :User, 'models/user'
     autoload :Video, 'models/video'
+    autoload :Tag, 'models/tag'
     autoload :GuestUser, 'models/guest_user'
     autoload :EarlyAccess, 'models/early_access'
     autoload :CreditPurchase, 'models/credit_purchase'

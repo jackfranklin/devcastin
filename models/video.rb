@@ -3,6 +3,7 @@ module Devcasts
     class Video < BaseModel
 
       has_many :credit_video_purchases
+      has_and_belongs_to_many :tags
 
       validates :title, uniqueness: true
 

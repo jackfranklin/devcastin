@@ -22,6 +22,12 @@
 
     <h4>Description</h4>
     <p><%= @video.description %></p>
+
+    <h4>Tags</h4>
+    <% @video.tags.each do |tag| %>
+      <%= tag.title %>
+    <% end %>
+
   </div>
 
   <div class="large-3 large-offset-1 columns">
