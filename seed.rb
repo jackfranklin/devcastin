@@ -1,4 +1,4 @@
-%w{user video credit_purchase credit_video_purchase}.each do |f|
+%w{user video tag credit_purchase credit_video_purchase}.each do |f|
   require_relative "models/#{f}.rb"
 end
 
@@ -9,6 +9,7 @@ User.collection.drop
 Video.collection.drop
 CreditPurchase.collection.drop
 CreditVideoPurchase.collection.drop
+Tag.collection.drop
 
 user = User.create_or_get_from_omniauth(
   nickname: 'jackfranklin',
@@ -26,6 +27,9 @@ video1 = Video.new(
 )
 
 video1.save!
+
+tag = Tag.new(title: 'Vim', slug: 'vim')
+tag.save!
 
 Video.create!(
   title: 'Testing Angular',
@@ -49,6 +53,7 @@ Video.create!(
   s3_url: 'http://jf-devcasts.s3.amazonaws.com/ScreenFlow.mp4',
   is_free: true,
   topics: ['Vim', 'Vim Plugins'],
+  tags: [tag],
   published: true
 
 )
