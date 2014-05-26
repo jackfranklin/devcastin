@@ -25,7 +25,7 @@
 
     <h4>Tags</h4>
     <% @video.tags.each do |tag| %>
-      <%= tag.title %>
+      <a href="/archives/tag/<%= tag.slug %>"><%= tag.title %></a>
     <% end %>
 
   </div>
