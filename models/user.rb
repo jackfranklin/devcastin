@@ -35,14 +35,7 @@ module Devcasts
       end
 
       def credits_remaining
-        sum = Proc.new { |x, y| x + y }
-        credit_amounts = self.credit_purchases.map(&:credit_amount)
-        total_credits = credit_amounts.reduce(&sum) || 0
-        spent_amounts = self.credit_video_purchases.map(&:credit_amount)
-        total_spent = spent_amounts.reduce(&sum) || 0
-        coupon_amounts = self.coupons.map(&:credit_amount)
-        coupon_additions = coupon_amounts.reduce(&sum) || 0
-        coupon_additions + total_credits - total_spent
+        coupon_credits_gained + credits_purchased - credits_spent
       end
 
       def use_coupon_code!(code)
@@ -50,6 +43,20 @@ module Devcasts
         self.save
       rescue Mongoid::Errors::DocumentNotFound
         false
+      end
+
+      private
+
+      def coupon_credits_gained
+        self.coupons.map(&:credit_amount).reduce { |x, y| x + y } || 0
+      end
+
+      def credits_spent
+        self.credit_video_purchases.map(&:credit_amount).reduce { |x, y| x + y } || 0
+      end
+
+      def credits_purchased
+        self.credit_purchases.map(&:credit_amount).reduce { |x, y| x + y } || 0
       end
     end
   end
