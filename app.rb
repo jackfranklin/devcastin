@@ -13,6 +13,8 @@ require 'mailer'
 
 require 'mongoid'
 
+I18n.enforce_available_locales = false
+
 module Devcasts
   class App < Sinatra::Application
 

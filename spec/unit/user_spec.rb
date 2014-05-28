@@ -65,6 +65,36 @@ describe User do
     end
   end
 
+  describe "#use_coupon_code!" do
+    it "applies the extra credit to the user" do
+      coupon = create(:coupon)
+      user = create(:user)
+      user.use_coupon_code!(coupon.code)
+      expect(user.credits_remaining).to eq(1)
+    end
+
+    it "does not work for inactive coupons" do
+      coupon = create(:coupon, active: false)
+      user = create(:user)
+      user.use_coupon_code!(coupon.code)
+      expect(user.credits_remaining).to eq(0)
+    end
+
+    it "does not let the same coupon be applied twice" do
+      coupon = create(:coupon)
+      user = create(:user)
+      user.use_coupon_code!(coupon.code)
+      user.use_coupon_code!(coupon.code)
+      expect(user.credits_remaining).to eq(1)
+    end
+
+    it "does not let the user use a made up code" do
+      user = create(:user)
+      user.use_coupon_code!("ABCNOTAREALCODE")
+      expect(user.credits_remaining).to eq(0)
+    end
+  end
+
   describe "#credits_remaining" do
     it "is 0 if there are no purchases" do
       user = build(:user)
@@ -83,7 +113,6 @@ describe User do
       video_purchase = build(:credit_video_purchase,
                              user: user, video: build(:video))
       expect(user.credits_remaining).to eq(4)
-
     end
   end
 end

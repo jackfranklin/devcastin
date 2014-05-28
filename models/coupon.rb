@@ -5,6 +5,7 @@ module Devcasts
     class Coupon < BaseModel
       field :code, type: String
       field :active, type: Boolean, default: true
+      field :credit_amount, type: Integer, default: 1
 
       scope :active, where(active: true)
 

@@ -40,7 +40,16 @@ module Devcasts
         total_credits = credit_amounts.reduce(&sum) || 0
         spent_amounts = self.credit_video_purchases.map(&:credit_amount)
         total_spent = spent_amounts.reduce(&sum) || 0
-        total_credits - total_spent
+        coupon_amounts = self.coupons.map(&:credit_amount)
+        coupon_additions = coupon_amounts.reduce(&sum) || 0
+        coupon_additions + total_credits - total_spent
+      end
+
+      def use_coupon_code!(code)
+        self.coupons << Coupon.active.find_by(code: code)
+        self.save
+      rescue Mongoid::Errors::DocumentNotFound
+        false
       end
     end
   end
