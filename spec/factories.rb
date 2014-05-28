@@ -5,6 +5,7 @@ require_relative "../models/guest_user"
 require_relative "../models/credit_purchase"
 require_relative "../models/credit_video_purchase"
 require_relative "../models/tag"
+require_relative "../models/coupon"
 
 FactoryGirl.define do
   factory :user, class: Devcasts::Models::User do
@@ -43,6 +44,8 @@ FactoryGirl.define do
 
   factory :guest_user, class: Devcasts::Models::GuestUser do
   end
+
+  factory :coupon, class: Devcasts::Models::Coupon
 
   factory :tag, class: Devcasts::Models::Tag do
     sequence(:title) { |n| "Tag #{n}" }

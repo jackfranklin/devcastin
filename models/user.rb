@@ -12,6 +12,7 @@ module Devcasts
 
       has_many :credit_purchases
       has_many :credit_video_purchases
+      has_and_belongs_to_many :coupons
 
       def self.create_or_get_from_omniauth(opts)
         user = self.where(email: opts[:email]).first
