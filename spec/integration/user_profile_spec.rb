@@ -9,6 +9,15 @@ describe "User profile page" do
     get url, {}, { 'rack.session' => { user_id: user.id } }
   end
 
+  describe "adding a credit" do
+    it "increases the user's credit by 1" do
+      coupon = create(:coupon)
+      post '/user/add_coupon', { coupon_code: coupon.code }, {
+        'rack.session' => { user_id: user.id } }
+      expect(user.reload.credits_remaining).to eq(1)
+    end
+  end
+
   context "a user with videos" do
     before(:each) do
       create(:credit_purchase, credit_amount: 5, user: user)

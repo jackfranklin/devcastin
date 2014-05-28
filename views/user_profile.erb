@@ -4,3 +4,9 @@ User profile<br>
 <% @videos.each do |video| %>
   <%= video.title %>
 <% end %>
+
+<h2>Add coupon code</h2>
+<form action="/user/add_coupon" method="post">
+  <p>Code: <input type="text" name="coupon_code" /></p>
+  <input type="submit" value="Go" />
+</form>

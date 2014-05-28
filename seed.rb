@@ -1,4 +1,4 @@
-%w{user video tag credit_purchase credit_video_purchase}.each do |f|
+%w{user video tag coupon credit_purchase credit_video_purchase}.each do |f|
   require_relative "models/#{f}.rb"
 end
 
@@ -68,4 +68,5 @@ Video.create!(
 
 CreditPurchase.create!(user: user, credit_amount: 5, stripe_charge_id: "1234ABC")
 CreditVideoPurchase.create!(user: user, video: video1)
+2.times { Coupon.create! }
 user.save!
