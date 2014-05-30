@@ -1,12 +1,22 @@
 require_relative "base_model"
+require_relative "history_tracker"
 
 module Devcasts
   module Models
     class User < BaseModel
+      include Mongoid::History::Trackable
+
       field :nickname, type: String
       field :name, type: String
       field :email, type: String
       field :stripe_customer_id, type: String
+
+      track_history :on => :all,
+                    :version_field => :version,
+                    :track_create  => true,
+                    :track_update  => true,
+                    :track_destroy => true
+
 
       validates :nickname, uniqueness: true
 

@@ -1,5 +1,6 @@
 require "spec_helper"
 require_relative "../../models/user"
+require_relative "../../models/history_tracker"
 
 include Devcasts::Models
 
@@ -113,6 +114,15 @@ describe User do
       video_purchase = build(:credit_video_purchase,
                              user: user, video: build(:video))
       expect(user.credits_remaining).to eq(4)
+    end
+  end
+
+  describe "auditing" do
+    it "is audited" do
+      user = User.create!(nickname: 'jackfranklin', email: 'jack@jackfranklin.net')
+      user.update_attributes!(nickname: 'jack')
+      modifications = user.history_tracks.last.modified
+      expect(modifications).to eq({ 'nickname' => 'jack' })
     end
   end
 end

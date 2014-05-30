@@ -8,6 +8,7 @@ require_relative 'factories'
 require_relative '../app'
 require_relative './support/feature_support'
 require_relative './support/aws_stubs'
+require_relative '../models/history_tracker'
 
 
 module Devcasts
@@ -49,6 +50,7 @@ RSpec.configure do |config|
   config.mock_with :mocha
   config.before(:suite) do
     Mongoid.load!("mongoid.yml", :test)
+    Mongoid::History.tracker_class_name = "Devcasts::Models::HistoryTracker".to_sym
 
     DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner[:mongoid].clean_with(:truncation)

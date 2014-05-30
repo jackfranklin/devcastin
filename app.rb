@@ -35,6 +35,7 @@ module Devcasts
     end
 
     Mongoid.load!("mongoid.yml", App.env)
+    Mongoid::History.tracker_class_name = :history_tracker
 
     Devcasts::App.preview_mode = ENV["PREVIEW_MODE"]
 

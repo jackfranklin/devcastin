@@ -10,6 +10,7 @@ gem 'omniauth-github'
 gem 'dotenv'
 
 gem 'mongoid'
+gem 'mongoid-history'
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 

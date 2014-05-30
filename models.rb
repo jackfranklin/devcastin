@@ -12,5 +12,6 @@ module Devcasts
     autoload :PaymentGateway, 'models/payment_gateway'
     autoload :AddVideoPayment, 'models/add_video_payment'
     autoload :Coupon, 'models/coupon'
+    autoload :HistoryTracker, 'models/history_tracker'
   end
 end

@@ -1,4 +1,5 @@
 require 'mongoid'
+require 'mongoid-history'
 
 module Devcasts
   module Models
