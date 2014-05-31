@@ -13,8 +13,24 @@ describe Coupon do
   end
 
   describe "generating a code" do
-    it "generates a unique code after initialisation" do
-      expect(build(:coupon).code).not_to be_nil
+    it "generates a unique code when saved to DB" do
+      expect(create(:coupon).code).not_to be_nil
     end
+
+    it "does not allow the code to change" do
+      coupon = create(:coupon)
+      initial_code = coupon.code
+      coupon.code = "ABC123"
+      coupon.save!
+      expect(coupon.code).to eq(initial_code)
+    end
+  end
+
+  it "is audited" do
+    user = create(:user)
+    coupon = Coupon.create!(users: [user])
+    user2 = create(:user)
+    user2.use_coupon_code!(coupon.code)
+    expect(coupon.history_tracks.count).to eq(2)
   end
 end
