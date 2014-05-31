@@ -50,7 +50,7 @@ RSpec.configure do |config|
   config.mock_with :mocha
   config.before(:suite) do
     Mongoid.load!("mongoid.yml", :test)
-    Mongoid::History.tracker_class_name = "Devcasts::Models::HistoryTracker".to_sym
+    Mongoid::History.tracker_class_name = Devcasts::Models::HistoryTracker
 
     DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner[:mongoid].clean_with(:truncation)
