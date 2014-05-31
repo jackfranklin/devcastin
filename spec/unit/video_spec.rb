@@ -30,4 +30,12 @@ describe Video do
       expect(video.purchase_for_user(user)).to eq(video_purchase)
     end
   end
+
+  it "is audited" do
+    video = create(:video)
+    tag = create(:tag)
+    tag.videos << video
+    tag.save!
+    expect(video.history_tracks.count).to eq(2)
+  end
 end

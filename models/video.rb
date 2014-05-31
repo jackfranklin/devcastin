@@ -1,6 +1,7 @@
 module Devcasts
   module Models
     class Video < BaseModel
+      include Mongoid::History::Trackable
 
       has_many :credit_video_purchases
       has_and_belongs_to_many :tags
@@ -15,6 +16,12 @@ module Devcasts
       field :published, type: Boolean, default: false
 
       default_scope where(published: true)
+
+      track_history :on => :all,
+                    :version_field => :version,
+                    :track_create  => true,
+                    :track_update  => true,
+                    :track_destroy => true
 
       def free?
         self.is_free
