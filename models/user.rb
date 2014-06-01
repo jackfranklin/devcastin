@@ -30,6 +30,7 @@ module Devcasts
         unless user
           user = self.new(opts)
         end
+        user.save!
         user
       end
 

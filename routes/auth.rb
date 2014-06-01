@@ -5,13 +5,7 @@ module Devcasts
     class Auth < Base
       get "/auth/github/callback" do
         user_info = request.env['omniauth.auth']['info']
-        user = User.create_or_get_from_omniauth(
-          nickname: user_info['nickname'],
-          name: user_info['name'],
-          email: user_info['email']
-        )
-        user.update_last_active_date!
-        user.save
+        user = AuthenticateUser.new(user_info).process
         session[:user_id] = user.id
         redirect "/"
       end

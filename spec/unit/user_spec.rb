@@ -36,6 +36,15 @@ describe User do
       expect(user).to be_a User
     end
 
+    it "persists to the DB" do
+      User.create_or_get_from_omniauth({
+        nickname: "jackfranklin",
+        name: "Jack Franklin",
+        email: "jack@jackfranklin.net",
+      })
+      expect(User.count).to eq(1)
+    end
+
     it "does not create the user if they exist already" do
       user = create(:user, email: 'test')
 

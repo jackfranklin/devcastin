@@ -13,5 +13,6 @@ module Devcasts
     autoload :AddVideoPayment, 'models/add_video_payment'
     autoload :Coupon, 'models/coupon'
     autoload :HistoryTracker, 'models/history_tracker'
+    autoload :AuthenticateUser, 'models/authenticate_user'
   end
 end
