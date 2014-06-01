@@ -26,22 +26,19 @@ describe User do
   end
 
   describe ".create_or_get_from_omniauth" do
-    it "creates the user if they do not exist" do
-      user = User.create_or_get_from_omniauth({
-        nickname: "jackfranklin",
+    let(:user_info) do
+      { nickname: "jackfranklin",
         name: "Jack Franklin",
-        email: "jack@jackfranklin.net",
-      })
+        email: "jack@jackfranklin.net" }
+    end
 
+    it "creates the user if they do not exist" do
+      user = User.create_or_get_from_omniauth(user_info)
       expect(user).to be_a User
     end
 
     it "persists to the DB" do
-      User.create_or_get_from_omniauth({
-        nickname: "jackfranklin",
-        name: "Jack Franklin",
-        email: "jack@jackfranklin.net",
-      })
+      User.create_or_get_from_omniauth(user_info)
       expect(User.count).to eq(1)
     end
 
