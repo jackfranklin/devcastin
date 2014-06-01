@@ -10,6 +10,7 @@ module Devcasts
           name: user_info['name'],
           email: user_info['email']
         )
+        user.update_last_active_date!
         user.save
         session[:user_id] = user.id
         redirect "/"

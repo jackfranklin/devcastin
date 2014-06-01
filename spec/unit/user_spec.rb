@@ -9,17 +9,15 @@ describe User do
 
   describe "last_active field" do
     it "is initially set to the creation time" do
-      current_time = Time.now
       user = nil
-      Timecop.freeze(current_time) { user = build(:user) }
+      Timecop.freeze(current_time = Time.now) { user = build(:user) }
       expect(user.last_active).to eq(current_time)
     end
 
     describe "#update_last_active_date!" do
       it "updates last_active field to Time.now" do
         user = build(:user)
-        last_active_time = Time.now
-        Timecop.freeze(last_active_time) do
+        Timecop.freeze(last_active_time = Time.now) do
           user.update_last_active_date!
         end
         expect(user.last_active).to eq(last_active_time)
