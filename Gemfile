@@ -36,5 +36,6 @@ group :test do
   gem 'factory_girl'
   gem 'rack-test'
   gem 'capybara'
+  gem 'timecop'
 end
 

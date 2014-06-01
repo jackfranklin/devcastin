@@ -1,10 +1,32 @@
 require "spec_helper"
+require "timecop"
 require_relative "../../models/user"
 require_relative "../../models/history_tracker"
 
 include Devcasts::Models
 
 describe User do
+
+  describe "last_active field" do
+    it "is initially set to the creation time" do
+      current_time = Time.now
+      user = nil
+      Timecop.freeze(current_time) { user = build(:user) }
+      expect(user.last_active).to eq(current_time)
+    end
+
+    describe "#update_last_active_date!" do
+      it "updates last_active field to Time.now" do
+        user = build(:user)
+        last_active_time = Time.now
+        Timecop.freeze(last_active_time) do
+          user.update_last_active_date!
+        end
+        expect(user.last_active).to eq(last_active_time)
+      end
+    end
+  end
+
   describe ".create_or_get_from_omniauth" do
     it "creates the user if they do not exist" do
       user = User.create_or_get_from_omniauth({

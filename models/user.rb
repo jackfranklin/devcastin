@@ -10,6 +10,7 @@ module Devcasts
       field :name, type: String
       field :email, type: String
       field :stripe_customer_id, type: String
+      field :last_active, type: Time, default: -> { Time.now }
 
       track_history :on => :all,
                     :version_field => :version,
@@ -30,6 +31,10 @@ module Devcasts
           user = self.new(opts)
         end
         user
+      end
+
+      def update_last_active_date!
+        self.update_attributes!(last_active: Time.now)
       end
 
       def name
