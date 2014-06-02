@@ -1,5 +1,6 @@
 require "spec_helper"
 require_relative "../../models/add_video_payment"
+require_relative "../../purchase_tracker"
 
 include Devcasts::Models
 
@@ -57,6 +58,11 @@ describe AddVideoPayment do
         Devcasts::Mailer.expects(:new).with do |*args|
           args[0] == user.email && args[2].include?(video.title)
         end.returns(Struct.new(:send).new(1))
+        add_video_payment.process
+      end
+
+      it "sends a new tracker" do
+        Devcasts::PurchaseTracker.expects(:new_video_purchase)
         add_video_payment.process
       end
     end

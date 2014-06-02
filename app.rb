@@ -10,6 +10,7 @@ Dotenv.load unless ENV["RACK_ENV"] == "test"
 require 'models'
 require 'routes'
 require 'mailer'
+require 'purchase_tracker'
 
 require 'mongoid'
 
