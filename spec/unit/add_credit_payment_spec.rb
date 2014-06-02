@@ -52,6 +52,7 @@ describe AddCreditPayment do
     end
 
     it "emails the customer" do
+      Devcasts::PurchaseTracker.stubs(:new_credit_purchase)
       Devcasts::Mailer.expects(:new).with do |*args|
         args[0] == user.email && args[1].include?('Credit Purchase')
       end.returns(Struct.new(:send).new(1))
