@@ -60,6 +60,13 @@ describe AddCreditPayment do
       AddCreditPayment.new(user: user, amount: 5).process
     end
 
+    it "sends a new tracker" do
+      stub_charge_success
+      stub_customer
+      Devcasts::PurchaseTracker.expects(:new_credit_purchase)
+      AddCreditPayment.new(user: user, amount: 5).process
+    end
+
     it "returns a struct with the charge information" do
       stub_charge_success
       stub_customer

@@ -1,10 +1,3 @@
-# AddVideoPayment
-#   => new(video, user, amount)
-#   => purchase
-#     CreditVideoPurchase.new(user, video, amount)
-#   => send_purchase_email
-
-
 module Devcasts
   module Models
     class AddVideoPayment
@@ -40,6 +33,7 @@ module Devcasts
 <p>Jack Franklin.</p>
 EML
           Devcasts::Mailer.new(@user.email, 'Video Purchase from Devcast.in', content).send
+          Devcasts::PurchaseTracker.new_video_purchase(@user, purchase)
         end
       end
     end

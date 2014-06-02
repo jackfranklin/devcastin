@@ -15,6 +15,7 @@ module Devcasts
         @purchase = create_purchase_if_success
         if @purchase.success?
           email_customer
+          Devcasts::PurchaseTracker.new_credit_purchase(@user, @purchase.charge)
         end
         @purchase
       end
