@@ -55,6 +55,7 @@ describe AddVideoPayment do
       end
 
       it "sends an email with the user's purchase" do
+        Devcasts::PurchaseTracker.stubs(:new_video_purchase)
         Devcasts::Mailer.expects(:new).with do |*args|
           args[0] == user.email && args[2].include?(video.title)
         end.returns(Struct.new(:send).new(1))
