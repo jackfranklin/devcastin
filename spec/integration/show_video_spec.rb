@@ -4,7 +4,11 @@ describe "Show Video Page" do
   let!(:user) { create(:user, name: 'JF') }
   let(:tag1) { create(:tag) }
   let(:tag2) { create(:tag) }
-  let!(:video) { create(:video, tags: [tag1, tag2]) }
+  let!(:video) do
+    video = create(:video, tags: [tag1, tag2])
+    video.revisions.create!(s3_url: 'madeup.com')
+    video
+  end
 
   def url
     "/videos/#{video.id}"

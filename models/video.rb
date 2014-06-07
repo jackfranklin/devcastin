@@ -3,6 +3,7 @@ module Devcasts
     class Video < BaseModel
       include Mongoid::History::Trackable
 
+      embeds_many :revisions
       has_many :credit_video_purchases
       has_and_belongs_to_many :tags
 
@@ -10,7 +11,6 @@ module Devcasts
 
       field :title, type: String
       field :description, type: String
-      field :s3_url, type: String
       field :is_free, type: Boolean, default: false
       field :topics, type: Array, default: []
       field :published, type: Boolean, default: false
@@ -27,17 +27,16 @@ module Devcasts
         self.is_free
       end
 
+      def latest_revision
+        revisions.order_by(:created_at.desc).first
+      end
+
       def purchase_for_user(user)
         self.credit_video_purchases.select { |p| p.user = user }.first
       end
 
       def hour_s3_url
-        s3 = AWS::S3.new
-        s3_filename = Pathname.new(s3_url).split.last.to_s
-
-        bucket = s3.buckets['jf-devcasts']
-        vid = bucket.objects[s3_filename]
-        vid.url_for(:read, :expires => 60).to_s
+        latest_revision.hour_s3_url
       end
     end
   end

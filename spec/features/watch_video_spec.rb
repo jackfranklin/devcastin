@@ -3,7 +3,7 @@ require 'spec_helper'
 include Devcasts::Models
 
 describe "Viewing videos", :type => :feature do
-  let!(:video) { create(:video, :is_paid) }
+  let!(:video) { create(:video, :is_paid, :with_revision) }
   let(:user) { User.where(name: 'Jack Franklin').first }
   let(:video_path) { "/videos/#{video.id}" }
 
@@ -33,7 +33,7 @@ describe "Viewing videos", :type => :feature do
   end
 
   context "with a free video" do
-    let!(:video) { create(:video, :is_free) }
+    let!(:video) { create(:video, :is_free, :with_revision) }
 
     context "the user is signed in" do
       it "shows them the video" do

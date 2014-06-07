@@ -6,6 +6,7 @@ require_relative "../models/credit_purchase"
 require_relative "../models/credit_video_purchase"
 require_relative "../models/tag"
 require_relative "../models/coupon"
+require_relative "../models/revision"
 
 FactoryGirl.define do
   factory :user, class: Devcasts::Models::User do
@@ -25,8 +26,12 @@ FactoryGirl.define do
   factory :video, class: Devcasts::Models::Video do
     sequence(:title) { |n| "Video #{n}" }
     description 'lorem ipsum'
-    s3_url 'someurl.com'
     published true
+
+    trait :with_revision do
+      revisions { [FactoryGirl.build(:revision)] }
+    end
+
 
     trait :is_free do
       is_free true
@@ -39,7 +44,10 @@ FactoryGirl.define do
     trait :unpublished do
       published false
     end
+  end
 
+  factory :revision, class: Devcasts::Models::Revision do
+    sequence(:s3_url) { |n| "http://someurl#{n}.com" }
   end
 
   factory :guest_user, class: Devcasts::Models::GuestUser do

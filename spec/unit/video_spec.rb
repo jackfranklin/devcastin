@@ -1,9 +1,24 @@
 require "spec_helper"
+require "timecop"
 require_relative "../../models/video"
 
 include Devcasts::Models
 
 describe Video do
+  describe "#latest_revision" do
+    it "fetches the latest revision based on date" do
+      video = create(:video)
+      Timecop.freeze(Time.now - 9999) do
+        video.revisions.create!(s3_url: '1')
+      end
+      video.revisions.create!(s3_url: '2')
+      Timecop.freeze(Time.now - 8888) do
+        video.revisions.create!(s3_url: '3')
+      end
+      expect(video.latest_revision.s3_url).to eq('2')
+    end
+  end
+
   describe "#tags" do
     it "has many tags" do
       tag1 = create(:tag)

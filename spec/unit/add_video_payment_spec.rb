@@ -6,7 +6,7 @@ include Devcasts::Models
 describe AddVideoPayment do
 
   let(:user) { create(:user) }
-  let(:video) { create(:video) }
+  let(:video) { create(:video, :with_revision) }
   let(:add_video_payment) do
     AddVideoPayment.new(user: user, video: video, credit_amount: 1)
   end
