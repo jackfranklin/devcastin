@@ -21,6 +21,10 @@ namespace(:spec) do
     t.rspec_opts = "--tag ~type:feature"
   end
 
+  RSpec::Core::RakeTask.new(:integration) do |t|
+    t.pattern = './spec/integration/*_spec.rb'
+  end
+
   RSpec::Core::RakeTask.new(:features) do |t|
     t.pattern = './spec/features/*_spec.rb'
   end
