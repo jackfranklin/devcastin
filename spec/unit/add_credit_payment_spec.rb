@@ -23,7 +23,7 @@ describe AddCreditPayment do
         user: user,
         amount: 10
       ).process
-      expect(result.success?).to be_false
+      expect(result.success?).to be false
     end
 
     it "does not add credit if payment fails" do
@@ -74,7 +74,7 @@ describe AddCreditPayment do
 
       result = AddCreditPayment.new(user: user, amount: 10).process
       expect(result.charge).to be_a(CreditPurchase)
-      expect(result.success?).to be_true
+      expect(result.success?).to be true
     end
   end
 

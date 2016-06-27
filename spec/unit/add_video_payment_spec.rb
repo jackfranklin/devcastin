@@ -42,7 +42,7 @@ describe AddVideoPayment do
       before(:each) { add_video_payment.process }
 
       it "lets them buy the video" do
-        expect(add_video_payment.success?).to be_true
+        expect(add_video_payment.success?).to be true
       end
 
       it "saves the purchase with the correct associations" do
@@ -74,7 +74,7 @@ describe AddVideoPayment do
       before(:each) { add_video_payment.process }
 
       it "does not let the user buy the video" do
-        expect(add_video_payment.success?).to be_false
+        expect(add_video_payment.success?).to be false
       end
     end
 

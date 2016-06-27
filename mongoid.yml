@@ -1,17 +1,17 @@
 development:
-  sessions:
+  clients:
     default:
       database: devcastin
       hosts:
         - localhost:27017
 
 production:
-  sessions:
+  clients:
     default:
       uri: <%= ENV['MONGOHQ_URL'] %>
 
 test:
-  sessions:
+  clients:
     default:
       database: devcastin_tests
       hosts:

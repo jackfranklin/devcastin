@@ -10,7 +10,7 @@ module Devcasts
       field :credit_amount, type: Integer, default: 1
       attr_readonly :code
 
-      scope :active, where(active: true)
+      scope :active, -> { where(active: true) }
 
       has_and_belongs_to_many :users
 

@@ -10,6 +10,7 @@ gem 'omniauth-github'
 gem 'dotenv'
 
 gem 'mongoid'
+gem 'mongoid_paranoia'
 gem 'mongoid-history'
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
@@ -31,7 +32,7 @@ end
 
 group :test do
   gem 'rspec'
-  gem 'database_cleaner', :github => 'bmabey/database_cleaner'
+  gem 'database_cleaner'
   gem 'mocha'
   gem 'factory_girl'
   gem 'rack-test'

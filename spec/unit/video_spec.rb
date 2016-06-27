@@ -29,11 +29,11 @@ describe Video do
 
   describe "#free?" do
     it "is true if is_free is true" do
-      expect(build(:video, is_free: true).free?).to be_true
+      expect(build(:video, is_free: true).free?).to be true
     end
 
     it "is false if is_free is false" do
-      expect(build(:video, is_free: false).free?).to be_false
+      expect(build(:video, is_free: false).free?).to be false
     end
   end
 

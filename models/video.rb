@@ -15,7 +15,7 @@ module Devcasts
       field :topics, type: Array, default: []
       field :published, type: Boolean, default: false
 
-      default_scope where(published: true)
+      default_scope -> { where(published: true) }
 
       track_history :on => :all,
                     :version_field => :version,

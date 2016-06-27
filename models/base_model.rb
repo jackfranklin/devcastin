@@ -1,4 +1,5 @@
 require 'mongoid'
+require 'mongoid_paranoia'
 require 'mongoid-history'
 
 module Devcasts

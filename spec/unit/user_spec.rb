@@ -76,19 +76,19 @@ describe User do
       user = build(:user)
       video = build(:video)
       video_purchase = build(:credit_video_purchase, user: user, video: video)
-      expect(user.has_video?(video)).to be_true
+      expect(user.has_video?(video)).to be true
     end
 
     it "is true if the video is free" do
       user = build(:user)
       video = build(:video, is_free: true)
-      expect(user.has_video?(video)).to be_true
+      expect(user.has_video?(video)).to be true
     end
 
     it "is false if the user has not purchased the video" do
       user = build(:user)
       video = build(:video)
-      expect(user.has_video?(video)).to be_false
+      expect(user.has_video?(video)).to be false
     end
   end
 

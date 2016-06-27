@@ -32,7 +32,11 @@ describe "Archives" do
   context "the tags archive page" do
     let!(:tag) { create(:tag) }
     let(:url) { "/archives/tag/#{tag.slug}" }
-    let!(:video_with_tag) { create(:video, tags: [tag]) }
+    let!(:video_with_tag) do
+      video = create(:video)
+      video.tags << tag
+      video
+    end
     let!(:video_without_tag) { create(:video) }
     it "shows only videos with the tag" do
       make_request
