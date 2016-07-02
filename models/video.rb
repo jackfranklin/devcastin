@@ -14,6 +14,7 @@ module Devcasts
       field :is_free, type: Boolean, default: false
       field :topics, type: Array, default: []
       field :published, type: Boolean, default: false
+      field :s3_url, type: String
 
       default_scope -> { where(published: true) }
 

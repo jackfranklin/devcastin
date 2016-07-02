@@ -1,4 +1,4 @@
-%w{user video tag coupon credit_purchase credit_video_purchase}.each do |f|
+%w{user video tag coupon credit_purchase credit_video_purchase revision}.each do |f|
   require_relative "models/#{f}.rb"
 end
 

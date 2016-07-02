@@ -41,7 +41,6 @@ OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
   }
 })
 
-
 RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include Capybara::DSL

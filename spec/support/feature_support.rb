@@ -3,14 +3,17 @@ module Features
     def buy_some_credits
       click_link "Purchase Credits"
       click_on "Pay with Card"
-      within_frame 'stripe_checkout_app' do
+      sleep 2
+      stripe_iframe = all('iframe[name=stripe_checkout_app]').last
+
+      Capybara.within_frame stripe_iframe do
         fill_in("email", :with => "jack@jackfranklin.net")
-        fill_in("card_number", :with => "4242 4242 4242 4242")
-        fill_in("cc-exp", :with => "03/15")
-        fill_in("cc-csc", :with => "111")
+        page.execute_script(%Q{ $('input#card_number').val('4242 4242 4242 4242'); })
+        page.execute_script(%Q{ $('input#cc-exp').val('12/16'); })
+        page.execute_script(%Q{ $('input#cc-csc').val('111'); })
         click_on("Pay £7.50")
       end
-      sleep 2
+      sleep 5
     end
 
     def sign_in

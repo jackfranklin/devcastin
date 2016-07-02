@@ -13,7 +13,7 @@ gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'mongoid-history'
 
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 
 gem 'stamp'
 
@@ -38,5 +38,6 @@ group :test do
   gem 'rack-test'
   gem 'capybara'
   gem 'timecop'
+  gem 'selenium-webdriver', '2.53.0'
 end
 

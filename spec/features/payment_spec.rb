@@ -6,7 +6,7 @@ describe "Purchasing", :type => :feature do
   let!(:video) { create(:video, :with_revision, title: 'Test Video') }
 
   before(:each) do
-    User.any_instance.stubs(:stripe_customer_id).returns("cus_42bqWQ3tG2v2aW")
+    User.any_instance.stubs(:stripe_customer_id).returns("cus_8kOFAvHBDpanmt")
   end
 
   describe "buying some credits", :js => true do

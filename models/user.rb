@@ -26,10 +26,16 @@ module Devcasts
       has_and_belongs_to_many :coupons
 
       def self.create_or_get_from_omniauth(opts)
+        # convert to symbols for keys
+        opts = opts.each_with_object({}) do |(k, v), h|
+          h[k.to_sym] = v
+        end
+
         user = self.where(email: opts[:email]).first
         unless user
           user = self.new(opts)
         end
+
         user.save!
         user
       end
