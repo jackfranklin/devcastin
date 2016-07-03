@@ -30,7 +30,9 @@ describe "Purchasing", :type => :feature do
       buy_some_credits
       sleep 2
       visit "/"
-      click_link "Purchase (1 credit)"
+      within '.latest-video' do
+        click_link "Purchase (1 credit)"
+      end
       click_on "Purchase (one credit)"
       expect(page).to have_content 'Purchase Successful'
       expect(User.last.credits_remaining).to eq(4)
