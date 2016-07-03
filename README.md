@@ -15,6 +15,7 @@ Uses:
 ## Running the app locally
 
 - Create a `.env` that contains all the keys found in `.env.sample` and populate them.
+- Run `rake seed` to seed your database with some data.
 - Run `bundle exec shotgun -p 4567`
 - `open http://localhost:4567`
 
