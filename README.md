@@ -12,6 +12,12 @@ Uses:
 - Sinatra for the application.
 - OmniAuth and GitHub for user authentication and logging in.
 
+## Running the app locally
+
+- Create a `.env` that contains all the keys found in `.env.sample` and populate them.
+- Run `bundle exec shotgun -p 4567`
+- `open http://localhost:4567`
+
 ## Tests
 
 The `spec/feature/payments_spec.rb` require the `STRIPE_TEST_SECRET` and `STRIPE_TEST_PUBLISH` keys to be present in `.env`. Unfortunately the feature tests do currently make a request to the Stripe API; it would be nice to look into stubbing this.
